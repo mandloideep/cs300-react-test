@@ -3,7 +3,7 @@ import Button from "./button";
 import DangerButton from "./dangerButton";
 import Layout from "./layout";
 import LifecycleDemo from "./lifecycle";
-import WindowWidth from "./window";
+import WindowDemo from "./window";
 import ReactVsJs from "./reactVsJs";
 import UseStateDemo from "./useStateDemo";
 import UseEffectDemo from "./useEffectDemo";
@@ -56,12 +56,7 @@ function App() {
       {activeDemo === "composition" && <CompositionDemo />}
       {activeDemo === "forms" && <FormDemo />}
       {activeDemo === "lifecycle" && <LifecycleDemo />}
-      {activeDemo === "window" && (
-        <div className="demo-section">
-          <h2>Window Width Demo</h2>
-          <WindowWidth message="Hello, World!" delay={1000} />
-        </div>
-      )}
+      {activeDemo === "window" && <WindowDemo />}
       {activeDemo === "home" && (
         <Layout header={<h1>Header</h1>} footer={<h1>Footer</h1>}>
           <p>This is the original home page body.</p>
