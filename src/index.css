@@ -202,3 +202,65 @@ h1 {
   font-size: 14px;
   margin-top: 4px;
 }
+
+/* ===== Section Stepper ===== */
+.stepper-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.stepper-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.stepper-tab {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.stepper-tab:hover {
+  border-color: var(--primary-color);
+}
+
+.stepper-tab-active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  font-weight: bold;
+}
+
+.stepper-tab-done {
+  background-color: #e8f4e8;
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.stepper-progress {
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.stepper-progress-bar {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.stepper-content {
+  min-height: 200px;
+}
