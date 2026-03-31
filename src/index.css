@@ -40,3 +40,165 @@ h1 {
   background-color: #e74c3c;
   color: #fff;
 }
+
+/* ===== Demo Navigation ===== */
+.demo-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #ddd;
+}
+
+.demo-nav .btn {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.demo-nav .btn-active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* ===== Demo Sections ===== */
+.demo-section {
+  padding: 16px 0;
+  max-width: 800px;
+}
+
+.demo-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.demo-subsection {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 16px;
+  margin-bottom: 32px;
+}
+
+.demo-subsection h3 {
+  color: var(--text-color);
+  margin-top: 0;
+}
+
+.demo-note {
+  font-style: italic;
+  color: #888;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.demo-practical {
+  background-color: #eef6ff;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 32px;
+}
+
+.demo-practical h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.demo-practical ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.demo-practical li {
+  margin-bottom: 4px;
+}
+
+/* ===== Traffic Light ===== */
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 60px;
+  background: #333;
+  padding: 12px;
+  border-radius: 8px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.light-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+/* ===== Side by Side ===== */
+.side-by-side {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.side-by-side > div {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* ===== Shell / Composition ===== */
+.shell {
+  border: 2px solid var(--shell-bg, #ccc);
+  border-radius: 8px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.shell-title {
+  background-color: var(--shell-bg, #ccc);
+  color: var(--shell-text, #fff);
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.shell-content {
+  padding: 16px;
+  background-color: #fff;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 8px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* ===== Form Demo ===== */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.form-error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 4px;
+}
