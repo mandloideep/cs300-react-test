@@ -60,7 +60,9 @@ export default function ConditionalMounting() {
         creates and destroys the component.
       </p>
 
-      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+      <div
+        style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}
+      >
         <button
           className={`btn ${showSuccess ? "btn-primary" : "btn-secondary"}`}
           onClick={() => setShowSuccess((prev) => !prev)}

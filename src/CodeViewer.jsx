@@ -11,8 +11,6 @@ export default function CodeViewer({ code, fileName }) {
               ...style,
               margin: 0,
               padding: 12,
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word",
             }}
           >
             {tokens.map((line, i) => (

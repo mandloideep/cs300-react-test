@@ -50,7 +50,6 @@ export default function DebouncedSearch() {
           padding: "8px 12px",
           fontSize: 16,
           width: "100%",
-          maxWidth: 300,
           boxSizing: "border-box",
         }}
       />

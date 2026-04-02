@@ -51,7 +51,7 @@ export default function TrafficLight() {
         />
       </div>
 
-      <div style={{ display: "flex", gap: 8 }}>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         <button className="btn btn-danger" onClick={() => setLight("red")}>
           Red
         </button>

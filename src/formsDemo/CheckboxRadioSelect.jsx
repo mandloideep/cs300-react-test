@@ -43,7 +43,14 @@ export default function CheckboxRadioSelect() {
 
       <div className="form-group">
         <label>Favorite color:</label>
-        <div style={{ display: "flex", gap: "16px", marginTop: "4px" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "16px",
+            marginTop: "4px",
+            flexWrap: "wrap",
+          }}
+        >
           {["red", "blue", "green"].map((c) => (
             <label key={c}>
               <input

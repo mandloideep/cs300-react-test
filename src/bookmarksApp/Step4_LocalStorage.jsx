@@ -122,7 +122,6 @@ export default function Step4_LocalStorage() {
         placeholder="Search bookmarks..."
         style={{
           width: "100%",
-          maxWidth: "400px",
           padding: "8px",
           fontSize: "16px",
           marginBottom: "16px",

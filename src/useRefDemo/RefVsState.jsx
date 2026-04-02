@@ -56,16 +56,14 @@ export default function RefVsState() {
         The ref value on screen only updates when something ELSE causes a
         re-render.
       </p>
-      <button
-        className="btn btn-danger"
-        onClick={handleRefClick}
-        style={{ marginRight: 8 }}
-      >
-        Change Ref (+100, no re-render)
-      </button>
-      <button className="btn btn-primary" onClick={handleStateClick}>
-        Change State (+1, causes re-render)
-      </button>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <button className="btn btn-danger" onClick={handleRefClick}>
+          Change Ref (+100, no re-render)
+        </button>
+        <button className="btn btn-primary" onClick={handleStateClick}>
+          Change State (+1, causes re-render)
+        </button>
+      </div>
     </div>
   );
 }

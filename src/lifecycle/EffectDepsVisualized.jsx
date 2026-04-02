@@ -54,7 +54,9 @@ export default function EffectDepsVisualized() {
         you type.
       </p>
 
-      <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
+      <div
+        style={{ display: "flex", gap: 16, marginBottom: 12, flexWrap: "wrap" }}
+      >
         <div>
           <label>Name: </label>
           <input

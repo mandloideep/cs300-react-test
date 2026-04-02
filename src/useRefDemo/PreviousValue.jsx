@@ -35,16 +35,17 @@ export default function PreviousValue() {
       <p>
         Previous count: <strong>{prevCountRef.current}</strong>
       </p>
-      <button
-        className="btn btn-primary"
-        onClick={() => setCount((prev) => prev + 1)}
-        style={{ marginRight: 8 }}
-      >
-        Increment
-      </button>
-      <button className="btn btn-secondary" onClick={() => setCount(0)}>
-        Reset
-      </button>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <button
+          className="btn btn-primary"
+          onClick={() => setCount((prev) => prev + 1)}
+        >
+          Increment
+        </button>
+        <button className="btn btn-secondary" onClick={() => setCount(0)}>
+          Reset
+        </button>
+      </div>
       {/* How it works:
           1. count changes → re-render → screen shows new count and OLD prevCountRef
           2. After render, useEffect runs → saves count into prevCountRef

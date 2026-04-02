@@ -57,25 +57,21 @@ export default function Stopwatch() {
       <p style={{ fontSize: 32, fontWeight: "bold", fontFamily: "monospace" }}>
         {seconds}s
       </p>
-      <button
-        className="btn btn-primary"
-        onClick={start}
-        disabled={isRunning}
-        style={{ marginRight: 8 }}
-      >
-        Start
-      </button>
-      <button
-        className="btn btn-danger"
-        onClick={stop}
-        disabled={!isRunning}
-        style={{ marginRight: 8 }}
-      >
-        Stop
-      </button>
-      <button className="btn btn-secondary" onClick={reset}>
-        Reset
-      </button>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <button
+          className="btn btn-primary"
+          onClick={start}
+          disabled={isRunning}
+        >
+          Start
+        </button>
+        <button className="btn btn-danger" onClick={stop} disabled={!isRunning}>
+          Stop
+        </button>
+        <button className="btn btn-secondary" onClick={reset}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 }

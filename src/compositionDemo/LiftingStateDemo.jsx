@@ -13,7 +13,7 @@ function IndependentCounter({ label }) {
   const [count, setCount] = useState(0);
   console.log("INDEPENDENT COUNTER:", label, "rendering with count =", count);
   return (
-    <div className="card" style={{ display: "inline-block", marginRight: 12 }}>
+    <div className="card">
       <strong>{label}:</strong> {count}
       <br />
       <button
@@ -31,7 +31,7 @@ function IndependentCounter({ label }) {
 function SharedCounter({ label, count, onIncrement }) {
   console.log("SHARED COUNTER:", label, "rendering with count =", count);
   return (
-    <div className="card" style={{ display: "inline-block", marginRight: 12 }}>
+    <div className="card">
       <strong>{label}:</strong> {count}
       <br />
       <button
@@ -63,17 +63,25 @@ function TemperatureConverter() {
   return (
     <div style={{ marginTop: 16 }}>
       <strong>Temperature Converter (shared state):</strong>
-      <div style={{ marginTop: 8 }}>
+      <div
+        style={{
+          display: "flex",
+          gap: 8,
+          flexWrap: "wrap",
+          alignItems: "center",
+          marginTop: 8,
+        }}
+      >
         <label>
           Celsius:{" "}
           <input
             type="number"
             value={celsius}
             onChange={(e) => setCelsius(Number(e.target.value))}
-            style={{ padding: "4px 8px", width: 80 }}
+            style={{ padding: "4px 8px", width: 70 }}
           />
         </label>
-        <span style={{ margin: "0 12px" }}>=</span>
+        <span>=</span>
         <label>
           Fahrenheit:{" "}
           <input
@@ -82,7 +90,7 @@ function TemperatureConverter() {
             onChange={(e) =>
               setCelsius(((Number(e.target.value) - 32) * 5) / 9)
             }
-            style={{ padding: "4px 8px", width: 80 }}
+            style={{ padding: "4px 8px", width: 70 }}
           />
         </label>
       </div>
@@ -107,7 +115,9 @@ export default function LiftingStateDemo() {
         <strong>Before lifting:</strong> each counter has its own state (they
         don't sync).
       </p>
-      <div style={{ marginBottom: 16 }}>
+      <div
+        style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}
+      >
         <IndependentCounter label="Counter A" />
         <IndependentCounter label="Counter B" />
       </div>
@@ -116,7 +126,9 @@ export default function LiftingStateDemo() {
         <strong>After lifting:</strong> the parent owns the state and passes it
         down. Both counters show the same value!
       </p>
-      <div style={{ marginBottom: 16 }}>
+      <div
+        style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}
+      >
         <SharedCounter
           label="Counter A"
           count={sharedCount}

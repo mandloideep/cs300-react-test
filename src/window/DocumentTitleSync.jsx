@@ -38,7 +38,7 @@ export default function DocumentTitleSync() {
         Notifications: {notifications}
       </p>
 
-      <div style={{ display: "flex", gap: 8 }}>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         <button
           className="btn btn-primary"
           onClick={() => setNotifications((prev) => prev + 1)}

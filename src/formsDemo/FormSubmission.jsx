@@ -49,9 +49,9 @@ export default function FormSubmission() {
             rows={3}
             style={{
               width: "100%",
-              maxWidth: "300px",
               padding: "8px",
               fontSize: "16px",
+              boxSizing: "border-box",
             }}
             required
           />

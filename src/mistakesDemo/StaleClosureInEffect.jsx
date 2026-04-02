@@ -45,7 +45,14 @@ export default function StaleClosureInEffect() {
         Count: <strong>{count}</strong>
       </p>
 
-      <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "16px",
+          flexWrap: "wrap",
+        }}
+      >
         <button
           className="btn btn-primary"
           onClick={() => setCount((prev) => prev + 1)}

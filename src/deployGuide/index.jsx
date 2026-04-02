@@ -1,4 +1,6 @@
 import SectionStepper from "../SectionStepper";
+import deployYml from "../../.github/workflows/deploy.yml?raw";
+import viteConfig from "../../vite.config.js?raw";
 
 // ============================================================
 // Deploy Guide — Step-by-step GitHub Pages deployment
@@ -40,47 +42,42 @@ const STEP_B = (
       GitHub Actions will build your app and deploy it for you. You need to
       create a workflow file that tells GitHub what to do.
     </p>
+
+    <h4>File Location (this matters!)</h4>
     <p>
-      Create the file <code>.github/workflows/deploy.yml</code> in your project
+      The file <strong>must</strong> be at exactly this path from your project
       root:
     </p>
-    <pre className="demo-code-block">{`name: Deploy to GitHub Pages
+    <pre className="demo-code-block">{`your-project/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml   ← this file
+├── src/
+├── package.json
+└── vite.config.js`}</pre>
+    <p className="demo-note">
+      GitHub <strong>only</strong> looks inside <code>.github/workflows/</code>{" "}
+      for workflow files. If you put <code>deploy.yml</code> anywhere else (like
+      the project root), GitHub will never find it and nothing will happen. The
+      folder starts with a dot (<code>.github</code>), which means it is a
+      hidden folder — you may need to enable "Show hidden files" in your file
+      explorer to see it.
+    </p>
 
-on:
-  workflow_dispatch:
+    <h4>File Name</h4>
+    <p>
+      The file name (<code>deploy.yml</code>) can be anything you want — GitHub
+      runs every <code>.yml</code> file it finds in{" "}
+      <code>.github/workflows/</code>. We use <code>deploy.yml</code> to make
+      the purpose obvious. The <strong>name</strong> field inside the file (line
+      1: <code>name: Deploy to GitHub Pages</code>) is what shows up in the
+      GitHub Actions UI.
+    </p>
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - run: npm ci
-      - run: npm run build
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - id: deployment
-        uses: actions/deploy-pages@v4`}</pre>
+    <h4>Copy the workflow from the code panel →</h4>
+    <p>
+      Use the code panel on the right to copy the full workflow file contents.
+    </p>
     <p className="demo-note">
       The <code>workflow_dispatch</code> trigger means this workflow only runs
       when you manually trigger it — it will NOT auto-deploy on every push.
@@ -183,8 +180,8 @@ const STEP_E = (
 );
 
 const sections = [
-  { label: "A. Set Base Path", content: STEP_A },
-  { label: "B. Create Workflow", content: STEP_B },
+  { label: "A. Set Base Path", content: STEP_A, code: viteConfig },
+  { label: "B. Create Workflow", content: STEP_B, code: deployYml },
   { label: "C. Enable Pages", content: STEP_C },
   { label: "D. Push & Deploy", content: STEP_D },
   { label: "E. Verify", content: STEP_E },

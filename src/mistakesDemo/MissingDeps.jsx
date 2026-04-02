@@ -36,7 +36,14 @@ export default function MissingDeps() {
     <div className="demo-subsection">
       <h3>C. Missing Dependencies</h3>
 
-      <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "16px",
+          flexWrap: "wrap",
+        }}
+      >
         {[1, 2, 3].map((id) => (
           <button
             key={id}
@@ -51,7 +58,14 @@ export default function MissingDeps() {
         ))}
       </div>
 
-      <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "16px",
+          flexWrap: "wrap",
+        }}
+      >
         <button
           className={`btn ${mode === "broken" ? "btn-danger" : "btn-secondary"}`}
           onClick={() => setMode("broken")}
