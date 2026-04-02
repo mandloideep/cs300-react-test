@@ -290,12 +290,6 @@ h1 {
 .stepper-demo {
   min-width: 0;
   min-height: 0;
-  padding-right: 8px;
-}
-
-.stepper-split-bottom .stepper-demo {
-  padding-right: 0;
-  padding-bottom: 0;
 }
 
 .stepper-code {
@@ -322,6 +316,7 @@ h1 {
   transition: background 0.15s;
   align-self: stretch;
   z-index: 2;
+  margin: 0 8px;
 }
 
 .split-handle:hover,
@@ -331,6 +326,7 @@ h1 {
 
 .split-handle-horizontal {
   cursor: row-resize;
+  margin: 8px 0;
 }
 
 /* ===== Code Toolbar ===== */
@@ -387,7 +383,7 @@ h1 {
 @media (max-width: 768px) {
   .stepper-split {
     grid-template-columns: 1fr !important;
-    grid-template-rows: auto 6px auto !important;
+    grid-template-rows: auto 22px auto !important;
   }
 
   .stepper-code {

@@ -43,7 +43,7 @@ export default function SectionStepper({ sections }) {
         } else {
           ratio = ((e.clientY - rect.top) / rect.height) * 100;
         }
-        setSplitRatio(Math.min(Math.max(ratio, 20), 80));
+        setSplitRatio(Math.min(Math.max(ratio, 25), 75));
       };
 
       const onMouseUp = () => {
@@ -75,11 +75,11 @@ export default function SectionStepper({ sections }) {
   const splitStyle = {};
   if (hasCode && view === "both") {
     if (layout === "side") {
-      splitStyle.gridTemplateColumns = `${splitRatio}fr 6px ${100 - splitRatio}fr`;
+      splitStyle.gridTemplateColumns = `${splitRatio}fr 22px ${100 - splitRatio}fr`;
       splitStyle.gridTemplateRows = "1fr";
     } else {
       splitStyle.gridTemplateColumns = "1fr";
-      splitStyle.gridTemplateRows = `${splitRatio}fr 6px ${100 - splitRatio}fr`;
+      splitStyle.gridTemplateRows = `${splitRatio}fr 22px ${100 - splitRatio}fr`;
     }
   }
 
