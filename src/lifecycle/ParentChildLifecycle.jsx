@@ -29,7 +29,11 @@ function Child({ name, value }) {
 export default function ParentChildLifecycle() {
   const [parentCount, setParentCount] = useState(0);
 
-  console.log("PARENT-CHILD: 📦 Parent function body runs (parentCount =", parentCount, ")");
+  console.log(
+    "PARENT-CHILD: 📦 Parent function body runs (parentCount =",
+    parentCount,
+    ")",
+  );
 
   useEffect(() => {
     console.log("PARENT-CHILD: ✅ Parent effect runs");
@@ -42,9 +46,9 @@ export default function ParentChildLifecycle() {
     <div className="demo-subsection">
       <h3>B. Parent-Child Render Order</h3>
       <p className="demo-note">
-        Click the button and watch the console. The render order is:
-        Parent body → Child A body → Child B body → Child A effect → Child B effect → Parent effect.
-        React renders top-down but runs effects bottom-up!
+        Click the button and watch the console. The render order is: Parent body
+        → Child A body → Child B body → Child A effect → Child B effect → Parent
+        effect. React renders top-down but runs effects bottom-up!
       </p>
       {console.log("PARENT-CHILD: 📦 Parent JSX rendering")}
 
@@ -53,17 +57,22 @@ export default function ParentChildLifecycle() {
 
       <button
         className="btn btn-primary"
-        onClick={() => setParentCount(prev => prev + 1)}
+        onClick={() => setParentCount((prev) => prev + 1)}
         style={{ marginTop: 8 }}
       >
         Update Parent (count: {parentCount})
       </button>
 
       <div className="demo-note" style={{ marginTop: 12 }}>
-        <strong>Render phase (top-down):</strong> Parent body → Child A body → Child B body<br />
-        <strong>Effect phase (bottom-up):</strong> Child A effect → Child B effect → Parent effect<br />
+        <strong>Render phase (top-down):</strong> Parent body → Child A body →
+        Child B body
         <br />
-        React finishes ALL rendering first, then runs effects from deepest child up to parent.
+        <strong>Effect phase (bottom-up):</strong> Child A effect → Child B
+        effect → Parent effect
+        <br />
+        <br />
+        React finishes ALL rendering first, then runs effects from deepest child
+        up to parent.
       </div>
     </div>
   );

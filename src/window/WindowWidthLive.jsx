@@ -31,8 +31,8 @@ export default function WindowWidthLive() {
     <div className="demo-subsection">
       <h3>A. Live Window Width</h3>
       <p className="demo-note">
-        Resize your browser window. The value below updates in real-time!
-        Check the console to see the event listener subscribe/unsubscribe.
+        Resize your browser window. The value below updates in real-time! Check
+        the console to see the event listener subscribe/unsubscribe.
       </p>
       <p style={{ fontSize: 28, fontWeight: "bold", fontFamily: "monospace" }}>
         Window width: {width}px
@@ -40,7 +40,11 @@ export default function WindowWidthLive() {
       <p>
         Screen size:{" "}
         <strong>
-          {width < 600 ? "📱 Mobile" : width < 1024 ? "📟 Tablet" : "🖥️ Desktop"}
+          {width < 600
+            ? "📱 Mobile"
+            : width < 1024
+              ? "📟 Tablet"
+              : "🖥️ Desktop"}
         </strong>
       </p>
     </div>

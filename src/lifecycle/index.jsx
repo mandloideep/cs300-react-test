@@ -3,6 +3,10 @@ import LifecycleTimeline from "./LifecycleTimeline";
 import ParentChildLifecycle from "./ParentChildLifecycle";
 import ConditionalMounting from "./ConditionalMounting";
 import EffectDepsVisualized from "./EffectDepsVisualized";
+import LifecycleTimelineCode from "./LifecycleTimeline.jsx?raw";
+import ParentChildLifecycleCode from "./ParentChildLifecycle.jsx?raw";
+import ConditionalMountingCode from "./ConditionalMounting.jsx?raw";
+import EffectDepsVisualizedCode from "./EffectDepsVisualized.jsx?raw";
 
 // ============================================================
 // Lifecycle Demo — Understanding When React Does What
@@ -17,24 +21,55 @@ const PRACTICAL = (
   <div className="demo-practical">
     <h3>Why does the lifecycle matter?</h3>
     <ul>
-      <li><strong>Mount</strong> — fetch data, set up event listeners, start animations</li>
-      <li><strong>Update</strong> — react to state/prop changes, sync external systems</li>
-      <li><strong>Unmount</strong> — clean up timers, cancel network requests, remove event listeners</li>
-      <li><strong>Parent-child order</strong> — know that children finish rendering before parent effects run</li>
-      <li><strong>Conditional rendering</strong> — toggling a component is a real mount/unmount, not just CSS display:none</li>
+      <li>
+        <strong>Mount</strong> — fetch data, set up event listeners, start
+        animations
+      </li>
+      <li>
+        <strong>Update</strong> — react to state/prop changes, sync external
+        systems
+      </li>
+      <li>
+        <strong>Unmount</strong> — clean up timers, cancel network requests,
+        remove event listeners
+      </li>
+      <li>
+        <strong>Parent-child order</strong> — know that children finish
+        rendering before parent effects run
+      </li>
+      <li>
+        <strong>Conditional rendering</strong> — toggling a component is a real
+        mount/unmount, not just CSS display:none
+      </li>
     </ul>
     <p className="demo-note">
-      Understanding the lifecycle helps you debug: "Why did my effect run twice?"
-      "Why is my cleanup not firing?" "When does my data fetch happen?"
+      Understanding the lifecycle helps you debug: "Why did my effect run
+      twice?" "Why is my cleanup not firing?" "When does my data fetch happen?"
     </p>
   </div>
 );
 
 const sections = [
-  { label: "A. Lifecycle Timeline", content: <LifecycleTimeline /> },
-  { label: "B. Parent-Child Order", content: <ParentChildLifecycle /> },
-  { label: "C. Conditional Mount", content: <ConditionalMounting /> },
-  { label: "D. Deps Visualized", content: <EffectDepsVisualized /> },
+  {
+    label: "A. Lifecycle Timeline",
+    content: <LifecycleTimeline />,
+    code: LifecycleTimelineCode,
+  },
+  {
+    label: "B. Parent-Child Order",
+    content: <ParentChildLifecycle />,
+    code: ParentChildLifecycleCode,
+  },
+  {
+    label: "C. Conditional Mount",
+    content: <ConditionalMounting />,
+    code: ConditionalMountingCode,
+  },
+  {
+    label: "D. Deps Visualized",
+    content: <EffectDepsVisualized />,
+    code: EffectDepsVisualizedCode,
+  },
   { label: "Practical Use Cases", content: PRACTICAL },
 ];
 
@@ -43,8 +78,9 @@ export default function LifecycleDemo() {
     <div className="demo-section">
       <h2>Lifecycle — When React Does What</h2>
       <p className="demo-note">
-        Open your browser console (F12 → Console) to see the full lifecycle logs.
-        Use the section buttons below to step through each concept one at a time.
+        Open your browser console (F12 → Console) to see the full lifecycle
+        logs. Use the section buttons below to step through each concept one at
+        a time.
       </p>
       <SectionStepper sections={sections} />
     </div>

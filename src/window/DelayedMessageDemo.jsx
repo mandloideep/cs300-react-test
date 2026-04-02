@@ -25,7 +25,7 @@ function DelayedMessage({ message, delay }) {
     console.log(`DELAYED MSG: ⏳ starting ${delay}ms timer for "${message}"`);
 
     const countdownId = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(countdownId);
           return 0;
@@ -40,7 +40,9 @@ function DelayedMessage({ message, delay }) {
     }, delay);
 
     return () => {
-      console.log(`DELAYED MSG: 🧹 cleaning up timers (component unmounted or props changed)`);
+      console.log(
+        `DELAYED MSG: 🧹 cleaning up timers (component unmounted or props changed)`,
+      );
       clearTimeout(timerId);
       clearInterval(countdownId);
     };
@@ -49,7 +51,9 @@ function DelayedMessage({ message, delay }) {
   return (
     <div>
       {show ? (
-        <p style={{ fontSize: 20, color: "#2ecc71", fontWeight: "bold" }}>{message}</p>
+        <p style={{ fontSize: 20, color: "#2ecc71", fontWeight: "bold" }}>
+          {message}
+        </p>
       ) : (
         <p style={{ fontSize: 20, color: "#888" }}>
           Waiting... ({timeLeft}s remaining)
@@ -68,10 +72,13 @@ export default function DelayedMessageDemo() {
     <div className="demo-subsection">
       <h3>B. Delayed Message (Timeout with Cleanup)</h3>
       <p className="demo-note">
-        The message appears after a delay. Change the delay or unmount early to see cleanup in action.
+        The message appears after a delay. Change the delay or unmount early to
+        see cleanup in action.
       </p>
 
-      <div style={{ display: "flex", gap: 12, marginBottom: 12, flexWrap: "wrap" }}>
+      <div
+        style={{ display: "flex", gap: 12, marginBottom: 12, flexWrap: "wrap" }}
+      >
         <div>
           <label>Message: </label>
           <input
@@ -83,7 +90,11 @@ export default function DelayedMessageDemo() {
         </div>
         <div>
           <label>Delay: </label>
-          <select value={delay} onChange={(e) => setDelay(Number(e.target.value))} style={{ padding: "4px 8px" }}>
+          <select
+            value={delay}
+            onChange={(e) => setDelay(Number(e.target.value))}
+            style={{ padding: "4px 8px" }}
+          >
             <option value={1000}>1 second</option>
             <option value={3000}>3 seconds</option>
             <option value={5000}>5 seconds</option>
@@ -91,14 +102,18 @@ export default function DelayedMessageDemo() {
         </div>
         <button
           className={`btn ${mounted ? "btn-danger" : "btn-primary"}`}
-          onClick={() => setMounted(prev => !prev)}
+          onClick={() => setMounted((prev) => !prev)}
         >
           {mounted ? "Unmount (cancel early)" : "Mount (start timer)"}
         </button>
       </div>
 
       {mounted && <DelayedMessage message={message} delay={delay} />}
-      {!mounted && <p className="demo-note">Component unmounted — timer was cleaned up. Check the console!</p>}
+      {!mounted && (
+        <p className="demo-note">
+          Component unmounted — timer was cleaned up. Check the console!
+        </p>
+      )}
     </div>
   );
 }

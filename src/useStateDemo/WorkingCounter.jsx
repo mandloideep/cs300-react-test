@@ -18,7 +18,11 @@ export default function WorkingCounter() {
   function handleClick() {
     // setCount tells React: "Hey, state changed! Re-render me."
     setCount(count + 1);
-    console.log("WORKING COUNTER: called setCount. count is STILL", count, "(until next render)");
+    console.log(
+      "WORKING COUNTER: called setCount. count is STILL",
+      count,
+      "(until next render)",
+    );
     // Notice: count doesn't change immediately! It's a snapshot of THIS render.
   }
 
@@ -26,9 +30,12 @@ export default function WorkingCounter() {
     <div className="demo-subsection">
       <h3>B. The Working Counter (useState)</h3>
       <p className="demo-note">
-        Now the UI updates! Check the console — notice the component re-renders each time.
+        Now the UI updates! Check the console — notice the component re-renders
+        each time.
       </p>
-      <p>Count on screen: <strong>{count}</strong></p>
+      <p>
+        Count on screen: <strong>{count}</strong>
+      </p>
       <button className="btn btn-primary" onClick={handleClick}>
         Increment (works!)
       </button>

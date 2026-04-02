@@ -17,9 +17,12 @@ export default function DebouncedSearch() {
     console.log("D. DEBOUNCE: setting 500ms timer for", JSON.stringify(query));
 
     const timerId = setTimeout(() => {
-      console.log("D. DEBOUNCE: ✅ Timer fired! Searching for:", JSON.stringify(query));
+      console.log(
+        "D. DEBOUNCE: ✅ Timer fired! Searching for:",
+        JSON.stringify(query),
+      );
       setDebouncedQuery(query);
-    }, 500);
+    }, 2000);
 
     // Cleanup: if the user types again before 500ms, cancel the old timer
     return () => {
@@ -35,17 +38,29 @@ export default function DebouncedSearch() {
     <div className="demo-subsection">
       <h3>D. Debounced Search (Practical Pattern)</h3>
       <p className="demo-note">
-        Type quickly, then stop. Only the final value gets "searched" after 500ms. Watch the console!
+        Type quickly, then stop. Only the final value gets "searched" after
+        500ms. Watch the console!
       </p>
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Type a search query..."
-        style={{ padding: "8px 12px", fontSize: 16, width: "100%", maxWidth: 300, boxSizing: "border-box" }}
+        style={{
+          padding: "8px 12px",
+          fontSize: 16,
+          width: "100%",
+          maxWidth: 300,
+          boxSizing: "border-box",
+        }}
       />
-      <p>You typed: <strong>{query}</strong></p>
-      <p>Debounced (searched) value: <strong>{debouncedQuery || "(waiting...)"}</strong></p>
+      <p>
+        You typed: <strong>{query}</strong>
+      </p>
+      <p>
+        Debounced (searched) value:{" "}
+        <strong>{debouncedQuery || "(waiting...)"}</strong>
+      </p>
     </div>
   );
 }

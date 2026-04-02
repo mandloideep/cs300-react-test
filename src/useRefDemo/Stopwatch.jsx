@@ -18,7 +18,7 @@ export default function Stopwatch() {
     console.log("STOPWATCH: starting interval");
     setIsRunning(true);
     timerRef.current = setInterval(() => {
-      setSeconds(prev => prev + 1);
+      setSeconds((prev) => prev + 1);
     }, 1000);
     // We store the interval ID in a ref, not state,
     // because changing it shouldn't re-render the component.
@@ -51,15 +51,26 @@ export default function Stopwatch() {
     <div className="demo-subsection">
       <h3>D. Stopwatch (timer ID in a ref)</h3>
       <p className="demo-note">
-        The interval ID is stored in a ref, not state. We need it to persist (to clear later) but changing it shouldn't re-render.
+        The interval ID is stored in a ref, not state. We need it to persist (to
+        clear later) but changing it shouldn't re-render.
       </p>
       <p style={{ fontSize: 32, fontWeight: "bold", fontFamily: "monospace" }}>
         {seconds}s
       </p>
-      <button className="btn btn-primary" onClick={start} disabled={isRunning} style={{ marginRight: 8 }}>
+      <button
+        className="btn btn-primary"
+        onClick={start}
+        disabled={isRunning}
+        style={{ marginRight: 8 }}
+      >
         Start
       </button>
-      <button className="btn btn-danger" onClick={stop} disabled={!isRunning} style={{ marginRight: 8 }}>
+      <button
+        className="btn btn-danger"
+        onClick={stop}
+        disabled={!isRunning}
+        style={{ marginRight: 8 }}
+      >
         Stop
       </button>
       <button className="btn btn-secondary" onClick={reset}>

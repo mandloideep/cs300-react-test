@@ -14,20 +14,33 @@ export default function RenderVsEffect() {
   console.log("A. RENDER: component function is running, count =", count);
 
   // 2️⃣ This runs AFTER the browser paints the screen
-  useEffect(() => {
-    console.log("A. EFFECT: this runs AFTER the screen updated, count =", count);
-  });
+  function effect() {
+    console.log(
+      "A. EFFECT: this runs AFTER the screen updated, count =",
+      count,
+    );
+  }
+  // useEffect(() => {
+  //   console.log("A. EFFECT: this runs AFTER the screen updated, count =", count);
+  // });
+  useEffect(effect);
 
   return (
     <div className="demo-subsection">
       <h3>A. Render vs Effect Timing</h3>
       <p className="demo-note">
-        Click the button and watch the console. "RENDER" logs first, then "EFFECT" logs after.
-        The component function runs → React updates the DOM → browser paints → useEffect runs.
+        Click the button and watch the console. "RENDER" logs first, then
+        "EFFECT" logs after. The component function runs → React updates the DOM
+        → browser paints → useEffect runs.
       </p>
       {console.log("A. JSX: inside the return statement, count =", count)}
-      <p>Count: <strong>{count}</strong></p>
-      <button className="btn btn-primary" onClick={() => setCount(prev => prev + 1)}>
+      <p>
+        Count: <strong>{count}</strong>
+      </p>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((prev) => prev + 1)}
+      >
         Increment (watch console order)
       </button>
     </div>

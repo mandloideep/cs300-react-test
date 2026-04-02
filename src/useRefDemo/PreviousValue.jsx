@@ -13,7 +13,13 @@ export default function PreviousValue() {
 
   // After each render, save the current count as the "previous" for next time
   useEffect(() => {
-    console.log("PREVIOUS VALUE: saving", count, "as previous (was", prevCountRef.current, ")");
+    console.log(
+      "PREVIOUS VALUE: saving",
+      count,
+      "as previous (was",
+      prevCountRef.current,
+      ")",
+    );
     prevCountRef.current = count;
   }, [count]);
 
@@ -23,9 +29,17 @@ export default function PreviousValue() {
       <p className="demo-note">
         The ref remembers the last value without causing extra re-renders.
       </p>
-      <p>Current count: <strong>{count}</strong></p>
-      <p>Previous count: <strong>{prevCountRef.current}</strong></p>
-      <button className="btn btn-primary" onClick={() => setCount(prev => prev + 1)} style={{ marginRight: 8 }}>
+      <p>
+        Current count: <strong>{count}</strong>
+      </p>
+      <p>
+        Previous count: <strong>{prevCountRef.current}</strong>
+      </p>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((prev) => prev + 1)}
+        style={{ marginRight: 8 }}
+      >
         Increment
       </button>
       <button className="btn btn-secondary" onClick={() => setCount(0)}>

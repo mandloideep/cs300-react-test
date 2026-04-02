@@ -21,9 +21,12 @@ export default function BrokenCounter() {
     <div className="demo-subsection">
       <h3>A. The Broken Counter (plain variable)</h3>
       <p className="demo-note">
-        Click the button and watch the console vs the screen. The variable changes, but the UI does not!
+        Click the button and watch the console vs the screen. The variable
+        changes, but the UI does not!
       </p>
-      <p>Count on screen: <strong>{count}</strong></p>
+      <p>
+        Count on screen: <strong>{count}</strong>
+      </p>
       <button className="btn btn-secondary" onClick={handleClick}>
         Increment (broken)
       </button>

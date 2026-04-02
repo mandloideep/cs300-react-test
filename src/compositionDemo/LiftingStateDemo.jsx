@@ -16,7 +16,11 @@ function IndependentCounter({ label }) {
     <div className="card" style={{ display: "inline-block", marginRight: 12 }}>
       <strong>{label}:</strong> {count}
       <br />
-      <button className="btn btn-primary" onClick={() => setCount(prev => prev + 1)} style={{ marginTop: 4 }}>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((prev) => prev + 1)}
+        style={{ marginTop: 4 }}
+      >
         +1
       </button>
     </div>
@@ -30,7 +34,11 @@ function SharedCounter({ label, count, onIncrement }) {
     <div className="card" style={{ display: "inline-block", marginRight: 12 }}>
       <strong>{label}:</strong> {count}
       <br />
-      <button className="btn btn-primary" onClick={onIncrement} style={{ marginTop: 4 }}>
+      <button
+        className="btn btn-primary"
+        onClick={onIncrement}
+        style={{ marginTop: 4 }}
+      >
         +1
       </button>
     </div>
@@ -45,7 +53,12 @@ function TemperatureConverter() {
   // Derived values — computed from state, not stored separately
   const fahrenheit = (celsius * 9) / 5 + 32;
 
-  console.log("TEMPERATURE: celsius =", celsius, "fahrenheit =", fahrenheit.toFixed(1));
+  console.log(
+    "TEMPERATURE: celsius =",
+    celsius,
+    "fahrenheit =",
+    fahrenheit.toFixed(1),
+  );
 
   return (
     <div style={{ marginTop: 16 }}>
@@ -66,14 +79,16 @@ function TemperatureConverter() {
           <input
             type="number"
             value={fahrenheit.toFixed(1)}
-            onChange={(e) => setCelsius(((Number(e.target.value) - 32) * 5) / 9)}
+            onChange={(e) =>
+              setCelsius(((Number(e.target.value) - 32) * 5) / 9)
+            }
             style={{ padding: "4px 8px", width: 80 }}
           />
         </label>
       </div>
       <p className="demo-note">
-        Both inputs share the same state (celsius). Changing either one updates the other.
-        The parent owns the "source of truth."
+        Both inputs share the same state (celsius). Changing either one updates
+        the other. The parent owns the "source of truth."
       </p>
     </div>
   );
@@ -89,7 +104,8 @@ export default function LiftingStateDemo() {
       <h3>D. Lifting State Up</h3>
 
       <p className="demo-note">
-        <strong>Before lifting:</strong> each counter has its own state (they don't sync).
+        <strong>Before lifting:</strong> each counter has its own state (they
+        don't sync).
       </p>
       <div style={{ marginBottom: 16 }}>
         <IndependentCounter label="Counter A" />
@@ -97,19 +113,19 @@ export default function LiftingStateDemo() {
       </div>
 
       <p className="demo-note">
-        <strong>After lifting:</strong> the parent owns the state and passes it down.
-        Both counters show the same value!
+        <strong>After lifting:</strong> the parent owns the state and passes it
+        down. Both counters show the same value!
       </p>
       <div style={{ marginBottom: 16 }}>
         <SharedCounter
           label="Counter A"
           count={sharedCount}
-          onIncrement={() => setSharedCount(prev => prev + 1)}
+          onIncrement={() => setSharedCount((prev) => prev + 1)}
         />
         <SharedCounter
           label="Counter B"
           count={sharedCount}
-          onIncrement={() => setSharedCount(prev => prev + 1)}
+          onIncrement={() => setSharedCount((prev) => prev + 1)}
         />
       </div>
 

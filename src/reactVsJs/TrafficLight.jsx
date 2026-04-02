@@ -11,7 +11,11 @@ import { useState } from "react";
 export default function TrafficLight() {
   const [light, setLight] = useState("red");
 
-  console.log("TRAFFIC LIGHT: state is", JSON.stringify(light), "→ React re-renders → UI updates automatically");
+  console.log(
+    "TRAFFIC LIGHT: state is",
+    JSON.stringify(light),
+    "→ React re-renders → UI updates automatically",
+  );
 
   // We never say "turn off the red, turn on the green."
   // We say "the light is green" and React updates everything.
@@ -19,9 +23,8 @@ export default function TrafficLight() {
     <div className="demo-subsection">
       <h3>C. State Drives UI — Traffic Light</h3>
       <p className="demo-note">
-        Click a button. The state changes to a color name.
-        The JSX says "if state is red, show red at full opacity."
-        React handles the rest.
+        Click a button. The state changes to a color name. The JSX says "if
+        state is red, show red at full opacity." React handles the rest.
       </p>
 
       <div className="traffic-light">
@@ -49,16 +52,32 @@ export default function TrafficLight() {
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
-        <button className="btn btn-danger" onClick={() => setLight("red")}>Red</button>
-        <button className="btn btn-secondary" onClick={() => setLight("yellow")} style={{ backgroundColor: "#f1c40f", color: "#333" }}>Yellow</button>
-        <button className="btn btn-primary" onClick={() => setLight("green")} style={{ backgroundColor: "#2ecc71" }}>Green</button>
+        <button className="btn btn-danger" onClick={() => setLight("red")}>
+          Red
+        </button>
+        <button
+          className="btn btn-secondary"
+          onClick={() => setLight("yellow")}
+          style={{ backgroundColor: "#f1c40f", color: "#333" }}
+        >
+          Yellow
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => setLight("green")}
+          style={{ backgroundColor: "#2ecc71" }}
+        >
+          Green
+        </button>
       </div>
 
-      <p>Current state: <strong>{light}</strong></p>
+      <p>
+        Current state: <strong>{light}</strong>
+      </p>
       <p className="demo-note">
-        The JSX is like a template: "given this state, here's what the UI looks like."
-        You change state → React re-renders → UI updates.
-        You never manually toggle DOM elements on/off.
+        The JSX is like a template: "given this state, here's what the UI looks
+        like." You change state → React re-renders → UI updates. You never
+        manually toggle DOM elements on/off.
       </p>
     </div>
   );

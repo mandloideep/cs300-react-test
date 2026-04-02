@@ -25,7 +25,10 @@ export default function DependencyArray() {
 
   // [searchTerm] → runs when searchTerm changes
   useEffect(() => {
-    console.log("B. EFFECT ([searchTerm]): searchTerm changed to", JSON.stringify(searchTerm));
+    console.log(
+      "B. EFFECT ([searchTerm]): searchTerm changed to",
+      JSON.stringify(searchTerm),
+    );
   }, [searchTerm]);
 
   // [clickCount] → runs when clickCount changes
@@ -37,7 +40,8 @@ export default function DependencyArray() {
     <div className="demo-subsection">
       <h3>B. The Dependency Array</h3>
       <p className="demo-note">
-        Type in the input and click the button. Watch which effects fire in the console.
+        Type in the input and click the button. Watch which effects fire in the
+        console.
       </p>
       <div style={{ marginBottom: 8 }}>
         <label>Search: </label>
@@ -49,14 +53,18 @@ export default function DependencyArray() {
           style={{ padding: "4px 8px", marginLeft: 8 }}
         />
       </div>
-      <button className="btn btn-secondary" onClick={() => setClickCount(prev => prev + 1)}>
+      <button
+        className="btn btn-secondary"
+        onClick={() => setClickCount((prev) => prev + 1)}
+      >
         Click count: {clickCount}
       </button>
       <div className="demo-note" style={{ marginTop: 12 }}>
-        <strong>Summary:</strong><br />
-        • <code>useEffect(fn)</code> — no array → runs after every render<br />
-        • <code>useEffect(fn, [])</code> — empty array → runs once on mount<br />
-        • <code>useEffect(fn, [x])</code> — runs when x changes
+        <strong>Summary:</strong>
+        <br />• <code>useEffect(fn)</code> — no array → runs after every render
+        <br />• <code>useEffect(fn, [])</code> — empty array → runs once on
+        mount
+        <br />• <code>useEffect(fn, [x])</code> — runs when x changes
       </div>
     </div>
   );

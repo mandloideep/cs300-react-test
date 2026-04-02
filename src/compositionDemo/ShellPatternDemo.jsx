@@ -20,11 +20,15 @@ export default function ShellPatternDemo() {
       <Shell backgroundColor="#3498db" title="My First Shell">
         <p>This content is INSIDE the shell.</p>
         <p>The shell provides the colored title bar and border.</p>
-        <p>Whatever we put here becomes the shell's <code>children</code> prop.</p>
+        <p>
+          Whatever we put here becomes the shell's <code>children</code> prop.
+        </p>
       </Shell>
 
       <Shell backgroundColor="#e74c3c" title="A Red Shell">
-        <p>Same component, different color. The Shell doesn't care what's inside!</p>
+        <p>
+          Same component, different color. The Shell doesn't care what's inside!
+        </p>
       </Shell>
     </div>
   );

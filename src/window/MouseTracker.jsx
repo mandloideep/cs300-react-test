@@ -32,28 +32,31 @@ export default function MouseTracker() {
     <div className="demo-subsection">
       <h3>C. Mouse Position Tracker</h3>
       <p className="demo-note">
-        Toggle tracking on, then move your mouse. The position updates in real-time.
-        Toggle off to unsubscribe — check the console for subscribe/unsubscribe logs.
+        Toggle tracking on, then move your mouse. The position updates in
+        real-time. Toggle off to unsubscribe — check the console for
+        subscribe/unsubscribe logs.
       </p>
 
       <button
         className={`btn ${tracking ? "btn-danger" : "btn-primary"}`}
-        onClick={() => setTracking(prev => !prev)}
+        onClick={() => setTracking((prev) => !prev)}
         style={{ marginBottom: 12 }}
       >
         {tracking ? "Stop Tracking" : "Start Tracking"}
       </button>
 
-      <div style={{
-        fontFamily: "monospace",
-        fontSize: 24,
-        fontWeight: "bold",
-        padding: 16,
-        backgroundColor: tracking ? "#eef6ff" : "#f5f5f5",
-        borderRadius: 8,
-        border: `2px solid ${tracking ? "#3498db" : "#ddd"}`,
-        transition: "all 0.3s",
-      }}>
+      <div
+        style={{
+          fontFamily: "monospace",
+          fontSize: 24,
+          fontWeight: "bold",
+          padding: 16,
+          backgroundColor: tracking ? "#eef6ff" : "#f5f5f5",
+          borderRadius: 8,
+          border: `2px solid ${tracking ? "#3498db" : "#ddd"}`,
+          transition: "all 0.3s",
+        }}
+      >
         x: {position.x}, y: {position.y}
       </div>
 

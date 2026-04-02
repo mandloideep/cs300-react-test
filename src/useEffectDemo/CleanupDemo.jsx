@@ -18,7 +18,7 @@ function TickingClock() {
     console.log("C. CLEANUP: ⏱️ starting interval (clock mounted)");
 
     const id = setInterval(() => {
-      setTicks(prev => prev + 1);
+      setTicks((prev) => prev + 1);
       console.log("C. CLEANUP: ⏱️ tick");
     }, 1000);
 
@@ -31,7 +31,11 @@ function TickingClock() {
     };
   }, []); // Empty deps = mount once, cleanup on unmount
 
-  return <p>Clock has ticked <strong>{ticks}</strong> times</p>;
+  return (
+    <p>
+      Clock has ticked <strong>{ticks}</strong> times
+    </p>
+  );
 }
 
 export default function CleanupDemo() {
@@ -41,14 +45,14 @@ export default function CleanupDemo() {
     <div className="demo-subsection">
       <h3>C. Cleanup Functions</h3>
       <p className="demo-note">
-        Toggle the clock on/off. Watch the console — "starting interval" on mount, "clearing interval" on unmount.
-        Cleanup prevents memory leaks!
+        Toggle the clock on/off. Watch the console — "starting interval" on
+        mount, "clearing interval" on unmount. Cleanup prevents memory leaks!
       </p>
       <button
         className="btn btn-primary"
         onClick={() => {
           console.log("C. CLEANUP: toggling clock", showClock ? "OFF" : "ON");
-          setShowClock(prev => !prev);
+          setShowClock((prev) => !prev);
         }}
       >
         {showClock ? "Hide Clock (unmount)" : "Show Clock (mount)"}

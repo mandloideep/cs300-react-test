@@ -17,13 +17,17 @@ export default function OnlineStatus() {
     function handleOnline() {
       console.log("ONLINE STATUS: 🟢 back online!");
       setIsOnline(true);
-      setHistory(prev => [...prev, `🟢 Online at ${new Date().toLocaleTimeString()}`].slice(-5));
+      setHistory((prev) =>
+        [...prev, `🟢 Online at ${new Date().toLocaleTimeString()}`].slice(-5),
+      );
     }
 
     function handleOffline() {
       console.log("ONLINE STATUS: 🔴 went offline!");
       setIsOnline(false);
-      setHistory(prev => [...prev, `🔴 Offline at ${new Date().toLocaleTimeString()}`].slice(-5));
+      setHistory((prev) =>
+        [...prev, `🔴 Offline at ${new Date().toLocaleTimeString()}`].slice(-5),
+      );
     }
 
     window.addEventListener("online", handleOnline);
@@ -40,18 +44,21 @@ export default function OnlineStatus() {
     <div className="demo-subsection">
       <h3>D. Online/Offline Status</h3>
       <p className="demo-note">
-        This detects your real network status. To test: open DevTools → Network tab → toggle "Offline" checkbox.
+        This detects your real network status. To test: open DevTools → Network
+        tab → toggle "Offline" checkbox.
       </p>
 
-      <div style={{
-        padding: 16,
-        borderRadius: 8,
-        backgroundColor: isOnline ? "#d4edda" : "#f8d7da",
-        border: `2px solid ${isOnline ? "#28a745" : "#dc3545"}`,
-        fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 8,
-      }}>
+      <div
+        style={{
+          padding: 16,
+          borderRadius: 8,
+          backgroundColor: isOnline ? "#d4edda" : "#f8d7da",
+          border: `2px solid ${isOnline ? "#28a745" : "#dc3545"}`,
+          fontSize: 20,
+          fontWeight: "bold",
+          marginBottom: 8,
+        }}
+      >
         {isOnline ? "🟢 Online" : "🔴 Offline"}
       </div>
 

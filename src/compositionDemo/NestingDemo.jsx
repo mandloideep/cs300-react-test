@@ -13,9 +13,9 @@ export default function NestingDemo() {
     <div className="demo-subsection">
       <h3>B. Nesting Components (Composition)</h3>
       <p className="demo-note">
-        Components inside components inside components.
-        Each Shell has a different color so you can SEE the nesting.
-        Check the console to see the rendering order.
+        Components inside components inside components. Each Shell has a
+        different color so you can SEE the nesting. Check the console to see the
+        rendering order.
       </p>
 
       <Shell backgroundColor="#3498db" title="Outer Shell (Blue)">

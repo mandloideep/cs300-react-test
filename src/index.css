@@ -8,7 +8,7 @@
 
 body {
   margin: 0;
-  padding: 50px;
+  padding: 20px 30px;
   font-family: var(--font-family);
   background-color: var(--background-color);
   color: var(--text-color);
@@ -64,7 +64,7 @@ h1 {
 /* ===== Demo Sections ===== */
 .demo-section {
   padding: 16px 0;
-  max-width: 800px;
+  max-width: 1400px;
 }
 
 .demo-section h2 {
@@ -181,7 +181,7 @@ h1 {
   border-radius: 6px;
   padding: 16px;
   margin: 8px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* ===== Form Demo ===== */
@@ -273,4 +273,129 @@ h1 {
 
 .stepper-content {
   min-height: 200px;
+}
+
+/* ===== Split View Layout ===== */
+.stepper-split {
+  display: grid;
+  gap: 0;
+  align-items: start;
+  position: relative;
+}
+
+.stepper-split-bottom {
+  align-items: stretch;
+}
+
+.stepper-demo {
+  min-width: 0;
+  min-height: 0;
+  padding-right: 8px;
+}
+
+.stepper-split-bottom .stepper-demo {
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.stepper-code {
+  min-width: 0;
+  min-height: 0;
+  max-height: 80vh;
+  overflow: auto;
+  border-radius: 8px;
+}
+
+.stepper-code-full {
+  max-height: none;
+}
+
+.stepper-split-bottom .stepper-code {
+  max-height: 60vh;
+}
+
+/* ===== Drag Handle ===== */
+.split-handle {
+  cursor: col-resize;
+  background: #ddd;
+  border-radius: 3px;
+  transition: background 0.15s;
+  align-self: stretch;
+  z-index: 2;
+}
+
+.split-handle:hover,
+.split-handle:active {
+  background: var(--primary-color);
+}
+
+.split-handle-horizontal {
+  cursor: row-resize;
+}
+
+/* ===== Code Toolbar ===== */
+.code-toolbar {
+  display: flex;
+  gap: 4px;
+}
+
+/* ===== Code Viewer ===== */
+.code-viewer {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.code-viewer-header {
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+  border-radius: 8px 8px 0 0;
+}
+
+.code-viewer pre {
+  margin: 0;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.line-number {
+  display: inline-block;
+  width: 3ch;
+  text-align: right;
+  margin-right: 16px;
+  color: #aaa;
+  user-select: none;
+}
+
+.code-toggle {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  background-color: #6c757d;
+  color: #fff;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ===== Responsive: stack on mobile ===== */
+@media (max-width: 768px) {
+  .stepper-split {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 6px auto !important;
+  }
+
+  .stepper-code {
+    position: static;
+    max-height: 50vh;
+  }
+
+  .split-handle {
+    cursor: row-resize;
+  }
 }

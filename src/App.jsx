@@ -9,7 +9,13 @@ import UseStateDemo from "./useStateDemo";
 import UseEffectDemo from "./useEffectDemo";
 import UseRefDemo from "./useRefDemo";
 import CompositionDemo from "./compositionDemo";
-import FormDemo from "./formDemo";
+import FormsDemo from "./formsDemo";
+import LocalStorageDemo from "./localStorageDemo";
+import FetchDemo from "./fetchDemo";
+import StatePatternsDemo from "./statePatternsDemo";
+import KeyboardDemo from "./keyboardDemo";
+import MistakesDemo from "./mistakesDemo";
+import BookmarksApp from "./bookmarksApp";
 
 // Navigation tabs in teaching order (left to right)
 const TABS = [
@@ -18,10 +24,16 @@ const TABS = [
   { id: "useEffect", label: "useEffect" },
   { id: "useRef", label: "useRef" },
   { id: "composition", label: "Composition" },
-  { id: "forms", label: "Forms" },
   { id: "lifecycle", label: "Lifecycle" },
   { id: "window", label: "Window" },
   { id: "home", label: "Home (Original)" },
+  { id: "forms", label: "Forms" },
+  { id: "localStorage", label: "localStorage" },
+  { id: "fetch", label: "Fetch" },
+  { id: "statePatterns", label: "State Patterns" },
+  { id: "keyboard", label: "Keyboard" },
+  { id: "mistakes", label: "Mistakes" },
+  { id: "bookmarks", label: "Bookmarks App" },
 ];
 
 function App() {
@@ -38,7 +50,11 @@ function App() {
             key={tab.id}
             className={`btn ${activeDemo === tab.id ? "btn-active" : "btn-secondary"}`}
             onClick={() => {
-              console.log("NAV: switching to", tab.id, "(previous component will unmount)");
+              console.log(
+                "NAV: switching to",
+                tab.id,
+                "(previous component will unmount)",
+              );
               setActiveDemo(tab.id);
             }}
           >
@@ -54,16 +70,28 @@ function App() {
       {activeDemo === "useEffect" && <UseEffectDemo />}
       {activeDemo === "useRef" && <UseRefDemo />}
       {activeDemo === "composition" && <CompositionDemo />}
-      {activeDemo === "forms" && <FormDemo />}
       {activeDemo === "lifecycle" && <LifecycleDemo />}
       {activeDemo === "window" && <WindowDemo />}
+      {activeDemo === "forms" && <FormsDemo />}
+      {activeDemo === "localStorage" && <LocalStorageDemo />}
+      {activeDemo === "fetch" && <FetchDemo />}
+      {activeDemo === "statePatterns" && <StatePatternsDemo />}
+      {activeDemo === "keyboard" && <KeyboardDemo />}
+      {activeDemo === "mistakes" && <MistakesDemo />}
+      {activeDemo === "bookmarks" && <BookmarksApp />}
       {activeDemo === "home" && (
         <Layout header={<h1>Header</h1>} footer={<h1>Footer</h1>}>
           <p>This is the original home page body.</p>
-          <Button variant="primary" onClick={() => alert("Primary button clicked!")}>
+          <Button
+            variant="primary"
+            onClick={() => alert("Primary button clicked!")}
+          >
             Primary Button
           </Button>
-          <Button variant="secondary" onClick={() => alert("Secondary button clicked!")}>
+          <Button
+            variant="secondary"
+            onClick={() => alert("Secondary button clicked!")}
+          >
             Secondary Button
           </Button>
           <DangerButton onClick={() => alert("Danger button clicked!")}>

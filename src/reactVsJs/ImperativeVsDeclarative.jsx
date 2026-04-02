@@ -22,7 +22,12 @@ function ImperativeWay() {
     countRef.current.textContent = count;
     countRef.current.style.color = count > 5 ? "red" : "black";
     countRef.current.style.fontWeight = "bold";
-    console.log("IMPERATIVE: I manually set textContent to", count, "and color to", count > 5 ? "red" : "black");
+    console.log(
+      "IMPERATIVE: I manually set textContent to",
+      count,
+      "and color to",
+      count > 5 ? "red" : "black",
+    );
     // This is imperative: step 1, step 2, step 3...
     // YOU are responsible for every single DOM change.
   }
@@ -34,7 +39,9 @@ function ImperativeWay() {
         This works, but YOU have to manually update every part of the DOM.
         Imagine doing this for 100 elements on a page!
       </p>
-      <p>Count: <span ref={countRef}>0</span></p>
+      <p>
+        Count: <span ref={countRef}>0</span>
+      </p>
       <button className="btn btn-secondary" onClick={handleClick}>
         Increment (imperative)
       </button>
@@ -59,19 +66,24 @@ function DeclarativeWay() {
     <div className="demo-subsection">
       <h3>B. The Declarative Way (React Thinking)</h3>
       <p className="demo-note">
-        Same result, but we never touch the DOM directly.
-        We describe WHAT the UI should be. React figures out HOW to update it.
+        Same result, but we never touch the DOM directly. We describe WHAT the
+        UI should be. React figures out HOW to update it.
       </p>
       {/* Notice: we don't say "change the color to red."
           We say: "the color IS red when count > 5."
           React handles the actual DOM changes. */}
       <p>
         Count:{" "}
-        <span style={{ color: count > 5 ? "red" : "black", fontWeight: "bold" }}>
+        <span
+          style={{ color: count > 5 ? "red" : "black", fontWeight: "bold" }}
+        >
           {count}
         </span>
       </p>
-      <button className="btn btn-primary" onClick={() => setCount(prev => prev + 1)}>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((prev) => prev + 1)}
+      >
         Increment (declarative)
       </button>
     </div>

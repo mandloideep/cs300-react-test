@@ -14,7 +14,7 @@ export default function EffectDepsVisualized() {
 
   function addLog(message) {
     const timestamp = new Date().toLocaleTimeString();
-    setEffectLog(prev => [`[${timestamp}] ${message}`, ...prev].slice(0, 15));
+    setEffectLog((prev) => [`[${timestamp}] ${message}`, ...prev].slice(0, 15));
   }
 
   // No deps — runs after EVERY render
@@ -50,7 +50,8 @@ export default function EffectDepsVisualized() {
       <h3>D. Effect Dependencies Visualized</h3>
       <p className="demo-note">
         Change the name or age. The log below shows which effects fired and why.
-        Notice: "No deps" fires on EVERY change, but "[name]" only fires when you type.
+        Notice: "No deps" fires on EVERY change, but "[name]" only fires when
+        you type.
       </p>
 
       <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
@@ -66,26 +67,35 @@ export default function EffectDepsVisualized() {
         </div>
         <div>
           <label>Age: </label>
-          <button className="btn btn-secondary" onClick={() => setAge(prev => prev + 1)}>
+          <button
+            className="btn btn-secondary"
+            onClick={() => setAge((prev) => prev + 1)}
+          >
             {age} (click +1)
           </button>
         </div>
       </div>
 
-      <div style={{
-        backgroundColor: "#1e1e1e",
-        color: "#d4d4d4",
-        padding: 12,
-        borderRadius: 6,
-        fontFamily: "monospace",
-        fontSize: 13,
-        maxHeight: 200,
-        overflow: "auto",
-      }}>
+      <div
+        style={{
+          backgroundColor: "#1e1e1e",
+          color: "#d4d4d4",
+          padding: 12,
+          borderRadius: 6,
+          fontFamily: "monospace",
+          fontSize: 13,
+          maxHeight: 200,
+          overflow: "auto",
+        }}
+      >
         <strong style={{ color: "#569cd6" }}>Effect Log (newest first):</strong>
-        {effectLog.length === 0 && <p style={{ color: "#666" }}>Interact with the inputs above...</p>}
+        {effectLog.length === 0 && (
+          <p style={{ color: "#666" }}>Interact with the inputs above...</p>
+        )}
         {effectLog.map((log, i) => (
-          <div key={i} style={{ opacity: 1 - i * 0.06 }}>{log}</div>
+          <div key={i} style={{ opacity: 1 - i * 0.06 }}>
+            {log}
+          </div>
         ))}
       </div>
     </div>

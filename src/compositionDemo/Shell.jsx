@@ -6,7 +6,12 @@
 // Uses CSS custom properties for theming.
 
 export default function Shell({ backgroundColor, textColor, title, children }) {
-  console.log("SHELL: rendering", JSON.stringify(title), "with bg =", backgroundColor);
+  console.log(
+    "SHELL: rendering",
+    JSON.stringify(title),
+    "with bg =",
+    backgroundColor,
+  );
 
   return (
     <div

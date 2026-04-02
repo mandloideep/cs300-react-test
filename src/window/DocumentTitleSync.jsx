@@ -30,8 +30,8 @@ export default function DocumentTitleSync() {
     <div className="demo-subsection">
       <h3>E. Document Title Sync</h3>
       <p className="demo-note">
-        Click to add notifications. Watch your browser tab title change!
-        This is a common useEffect pattern for keeping external state in sync.
+        Click to add notifications. Watch your browser tab title change! This is
+        a common useEffect pattern for keeping external state in sync.
       </p>
 
       <p style={{ fontSize: 20, fontWeight: "bold" }}>
@@ -39,10 +39,16 @@ export default function DocumentTitleSync() {
       </p>
 
       <div style={{ display: "flex", gap: 8 }}>
-        <button className="btn btn-primary" onClick={() => setNotifications(prev => prev + 1)}>
+        <button
+          className="btn btn-primary"
+          onClick={() => setNotifications((prev) => prev + 1)}
+        >
           Add Notification
         </button>
-        <button className="btn btn-secondary" onClick={() => setNotifications(prev => Math.max(0, prev - 1))}>
+        <button
+          className="btn btn-secondary"
+          onClick={() => setNotifications((prev) => Math.max(0, prev - 1))}
+        >
           Dismiss One
         </button>
         <button className="btn btn-danger" onClick={() => setNotifications(0)}>
