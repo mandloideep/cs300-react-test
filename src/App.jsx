@@ -17,6 +17,7 @@ import KeyboardDemo from "./keyboardDemo";
 import MistakesDemo from "./mistakesDemo";
 import BookmarksApp from "./bookmarksApp";
 import DeployGuide from "./deployGuide";
+import ReactRouterDemo from "./reactRouterDemo";
 
 // Navigation tabs in teaching order (left to right)
 const TABS = [
@@ -36,6 +37,7 @@ const TABS = [
   { id: "mistakes", label: "Mistakes" },
   { id: "bookmarks", label: "Bookmarks App" },
   { id: "deploy", label: "Deploy Guide" },
+  { id: "reactRouter", label: "React Router" },
 ];
 
 function App() {
@@ -101,6 +103,7 @@ function App() {
       {activeDemo === "mistakes" && <MistakesDemo />}
       {activeDemo === "bookmarks" && <BookmarksApp />}
       {activeDemo === "deploy" && <DeployGuide />}
+      {activeDemo === "reactRouter" && <ReactRouterDemo />}
       {activeDemo === "home" && (
         <Layout header={<h1>Header</h1>} footer={<h1>Footer</h1>}>
           <p>This is the original home page body.</p>

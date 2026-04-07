@@ -400,3 +400,261 @@ h1 {
     cursor: row-resize;
   }
 }
+
+/* ===== React Router Demo ===== */
+
+/* Evaluation table */
+.demo-practical table.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+.demo-table th,
+.demo-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.demo-table th {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.demo-table tr:nth-child(even) {
+  background-color: #f0f7ff;
+}
+
+/* Code blocks inside educational sections */
+.demo-practical pre.demo-code-block {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  padding: 14px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+/* Route indicator bar */
+.route-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.route-indicator-label {
+  color: #89b4fa;
+  font-weight: 600;
+}
+
+.route-indicator-path {
+  color: #a6e3a1;
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+/* Scoped styles for the live CourseHub demo */
+.router-demo-container .app-container {
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.router-demo-container header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px 20px;
+}
+
+.router-demo-container header h1 {
+  color: #fff;
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+}
+
+.router-demo-container .navbar {
+  display: flex;
+  gap: 12px;
+}
+
+.router-demo-container .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.router-demo-container .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.router-demo-container .nav-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+.router-demo-container main {
+  padding: 16px 20px;
+  min-height: 200px;
+}
+
+.router-demo-container footer {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Hero section */
+.router-demo-container .hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 32px 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.router-demo-container .hero h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.router-demo-container .hero .btn-primary {
+  display: inline-block;
+  margin-top: 12px;
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+}
+
+/* Course grid and cards */
+.router-demo-container .course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.router-demo-container .course-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.router-demo-container .course-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.router-demo-container .course-badge {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.router-demo-container .course-category {
+  display: inline-block;
+  background-color: #e8e8e8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.router-demo-container .card-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.router-demo-container .card-link:hover {
+  text-decoration: underline;
+}
+
+.router-demo-container .course-instructor {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Course detail page */
+.router-demo-container .course-detail {
+  margin-top: 16px;
+}
+
+.router-demo-container .course-description {
+  line-height: 1.6;
+}
+
+.router-demo-container .course-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+
+/* Search bar */
+.router-demo-container .search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.router-demo-container .search-bar input {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 280px;
+  transition: border-color 0.2s;
+}
+
+.router-demo-container .search-bar input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.router-demo-container .search-count {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.router-demo-container .no-results {
+  color: #888;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* 404 page */
+.router-demo-container .not-found {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.router-demo-container .not-found h2 {
+  color: #e74c3c;
+}
