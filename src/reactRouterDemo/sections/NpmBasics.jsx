@@ -25,7 +25,7 @@ function NpmBasics() {
         To add a library to your project, run this command in your project's
         terminal:
       </p>
-      <pre className="demo-code-block">{`npm install react-router-dom`}</pre>
+      <pre className="demo-code-block">{`npm install react-router`}</pre>
       <p>This does three things:</p>
       <ol>
         <li>
