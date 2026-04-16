@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import ComponentTree from "./ComponentTree";
 
 const ThemeContext = createContext(null);
 const UserContext = createContext(null);
@@ -24,7 +25,11 @@ function UserProvider({ children }) {
 
 function CartProvider({ children }) {
   const [items, setItems] = useState([]);
-  const add = () => setItems(arr => [...arr, { id: Date.now(), name: `Item ${arr.length + 1}` }]);
+  const add = () =>
+    setItems((arr) => [
+      ...arr,
+      { id: Date.now(), name: `Item ${arr.length + 1}` },
+    ]);
   const clear = () => setItems([]);
   return (
     <CartContext.Provider value={{ items, add, clear }}>
@@ -33,62 +38,120 @@ function CartProvider({ children }) {
   );
 }
 
-function ThemeBadge() {
+function ThemeBadgeLive() {
   const { theme, setTheme } = useContext(ThemeContext);
   return (
-    <div className="card">
+    <>
       <strong>Theme:</strong> {theme}{" "}
-      <button className="btn btn-secondary" onClick={() => setTheme(t => t === "light" ? "dark" : "light")}>
+      <button
+        className="btn btn-secondary"
+        onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
+      >
         toggle
       </button>
-    </div>
+    </>
   );
 }
 
-function UserBadge() {
+function UserBadgeLive() {
   const { user, setUser } = useContext(UserContext);
   return (
-    <div className="card">
+    <>
       <strong>User:</strong> {user.name} ({user.role}){" "}
       <button
         className="btn btn-secondary"
         onClick={() =>
-          setUser(u => u.name === "Ada" ? { name: "Grace", role: "guest" } : { name: "Ada", role: "admin" })
+          setUser((u) =>
+            u.name === "Ada"
+              ? { name: "Grace", role: "guest" }
+              : { name: "Ada", role: "admin" },
+          )
         }
       >
         switch
       </button>
-    </div>
+    </>
   );
 }
 
-function CartBadge() {
+function CartBadgeLive() {
   const { items, add, clear } = useContext(CartContext);
   return (
-    <div className="card">
+    <>
       <strong>Cart:</strong> {items.length} items{" "}
-      <button className="btn btn-secondary" onClick={add}>add</button>{" "}
-      <button className="btn btn-danger" onClick={clear}>clear</button>
-    </div>
+      <button className="btn btn-secondary" onClick={add}>
+        add
+      </button>{" "}
+      <button className="btn btn-danger" onClick={clear}>
+        clear
+      </button>
+    </>
   );
 }
+
+const tree = {
+  name: "ThemeProvider",
+  role: "provider",
+  hook: "useState('light') + <ThemeContext.Provider>",
+  propValue: "{ theme, setTheme }",
+  note: "Owns theme state and provides it via ThemeContext.",
+  children: [
+    {
+      name: "UserProvider",
+      role: "provider",
+      hook: "useState({ name, role }) + <UserContext.Provider>",
+      propValue: "{ user, setUser }",
+      note: "Owns user state and provides it via UserContext.",
+      children: [
+        {
+          name: "CartProvider",
+          role: "provider",
+          hook: "useState([]) + <CartContext.Provider>",
+          propValue: "{ items, add, clear }",
+          note: "Owns cart state and provides it via CartContext.",
+          children: [
+            {
+              name: "ThemeBadge",
+              role: "consumer",
+              hook: "useContext(ThemeContext)",
+              note: "Reads only theme. Ignores user/cart changes.",
+              display: <ThemeBadgeLive />,
+            },
+            {
+              name: "UserBadge",
+              role: "consumer",
+              hook: "useContext(UserContext)",
+              note: "Reads only user. Ignores theme/cart changes.",
+              display: <UserBadgeLive />,
+            },
+            {
+              name: "CartBadge",
+              role: "consumer",
+              hook: "useContext(CartContext)",
+              note: "Reads only cart. Ignores theme/user changes.",
+              display: <CartBadgeLive />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 export default function MultipleContexts() {
   return (
     <div className="demo-subsection">
       <h3>Multiple Contexts — split by concern</h3>
       <p className="demo-note">
-        Wrap providers in any order. Each context updates independently, so toggling
-        the theme doesn't re-render cart consumers, and adding to the cart doesn't
-        re-render theme consumers.
+        Wrap providers in any order. Each context updates independently, so
+        toggling the theme doesn't re-render cart consumers, and adding to the
+        cart doesn't re-render theme consumers.
       </p>
 
       <ThemeProvider>
         <UserProvider>
           <CartProvider>
-            <ThemeBadge />
-            <UserBadge />
-            <CartBadge />
+            <ComponentTree root={tree} />
           </CartProvider>
         </UserProvider>
       </ThemeProvider>
@@ -96,14 +159,26 @@ export default function MultipleContexts() {
       <div className="demo-practical">
         <h3>Should I make one big context or many small ones?</h3>
         <ul>
-          <li><strong>Many small ones (preferred).</strong> Each consumer only re-renders when its own context changes.</li>
-          <li><strong>One big context</strong> means every consumer re-renders on every change — wasteful.</li>
-          <li>Group values that change together (e.g., <code>cart.items</code> + <code>cart.total</code>).</li>
-          <li>Split values that change independently (theme vs user vs cart).</li>
+          <li>
+            <strong>Many small ones (preferred).</strong> Each consumer only
+            re-renders when its own context changes.
+          </li>
+          <li>
+            <strong>One big context</strong> means every consumer re-renders on
+            every change — wasteful.
+          </li>
+          <li>
+            Group values that change together (e.g., <code>cart.items</code> +{" "}
+            <code>cart.total</code>).
+          </li>
+          <li>
+            Split values that change independently (theme vs user vs cart).
+          </li>
         </ul>
         <p style={{ marginTop: 12 }}>
-          Wrapping order in <code>App.jsx</code> doesn't matter for correctness — only
-          for which context can read which (inner can read outer, not vice versa).
+          Wrapping order in <code>App.jsx</code> doesn't matter for correctness
+          — only for which context can read which (inner can read outer, not
+          vice versa).
         </p>
       </div>
     </div>

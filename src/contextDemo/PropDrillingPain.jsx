@@ -1,48 +1,62 @@
 import { useState } from "react";
+import ComponentTree from "./ComponentTree";
 
-function UserBadge({ user }) {
-  return (
-    <div className="tree-layer tree-leaf">
-      <div className="tree-layer-label">UserBadge (leaf — actually uses user)</div>
-      <strong>Logged in as:</strong> {user.name} ({user.role})
-    </div>
-  );
-}
+function buildTree(user, deep) {
+  const badge = {
+    name: "UserBadge",
+    role: "leaf",
+    prop: "user",
+    propValue: "user",
+    note: "Only this leaf actually reads user.name / user.role",
+    display: (
+      <>
+        <strong>Logged in as:</strong> {user.name} ({user.role})
+      </>
+    ),
+  };
 
-function UserMenu({ user }) {
-  return (
-    <div className="tree-layer">
-      <div className="tree-layer-label">UserMenu (passes user through)</div>
-      <UserBadge user={user} />
-    </div>
-  );
-}
+  const menu = {
+    name: "UserMenu",
+    role: "passthrough",
+    prop: "user",
+    note: "Doesn't use user — only forwards it to UserBadge",
+    children: [badge],
+  };
 
-function Header({ user }) {
-  return (
-    <div className="tree-layer">
-      <div className="tree-layer-label">Header (passes user through)</div>
-      <UserMenu user={user} />
-    </div>
-  );
-}
+  const header = {
+    name: "Header",
+    role: "passthrough",
+    prop: "user",
+    note: "Doesn't use user — only forwards it",
+    children: [menu],
+  };
 
-function ExtraLayer({ user }) {
-  return (
-    <div className="tree-layer">
-      <div className="tree-layer-label">ExtraLayer (also passes user through!)</div>
-      <Header user={user} />
-    </div>
-  );
-}
+  const layoutChild = deep
+    ? {
+        name: "ExtraLayer",
+        role: "passthrough",
+        prop: "user",
+        note: "A new layer — now it ALSO has to accept & forward user",
+        children: [header],
+      }
+    : header;
 
-function Layout({ user, deep }) {
-  return (
-    <div className="tree-layer">
-      <div className="tree-layer-label">Layout (passes user through)</div>
-      {deep ? <ExtraLayer user={user} /> : <Header user={user} />}
-    </div>
-  );
+  const layout = {
+    name: "Layout",
+    role: "passthrough",
+    prop: "user",
+    note: "Doesn't use user — only forwards it",
+    children: [layoutChild],
+  };
+
+  return {
+    name: "App",
+    role: "owner",
+    prop: "user",
+    propValue: `{ name: "${user.name}", role: "${user.role}" }`,
+    note: "App owns the user state with useState. It has to pass user down through every layer.",
+    children: [layout],
+  };
 }
 
 export default function PropDrillingPain() {
@@ -54,26 +68,34 @@ export default function PropDrillingPain() {
       <h3>Prop Drilling: Passing data through layers that don't need it</h3>
       <p className="demo-note">
         The <code>user</code> object lives in <code>App</code>. Only{" "}
-        <code>UserBadge</code> uses it. Every component in between has to accept and
-        forward it. This is "prop drilling".
+        <code>UserBadge</code> (the green leaf) uses it. Every component in
+        between has to accept and forward it. This is "prop drilling".
       </p>
 
-      <button className="btn btn-primary" onClick={() => setDeep(d => !d)}>
+      <button className="btn btn-primary" onClick={() => setDeep((d) => !d)}>
         {deep ? "Remove" : "Add"} a 4th layer
       </button>
 
-      <div className="tree-layer" style={{ marginTop: 16 }}>
-        <div className="tree-layer-label">App (owns the user state)</div>
-        <Layout user={user} deep={deep} />
+      <div style={{ marginTop: 16 }}>
+        <ComponentTree root={buildTree(user, deep)} />
       </div>
 
       <div className="demo-practical">
         <h3>Why this hurts</h3>
         <ul>
-          <li>Every middle component needs the <code>user</code> prop in its signature.</li>
+          <li>
+            Every middle component needs the <code>user</code> prop in its
+            signature.
+          </li>
           <li>Renaming the prop means editing every layer.</li>
-          <li>Adding a new layer (the 4th one above) means threading the prop through it too.</li>
-          <li>Middle components break encapsulation — they "know" about a value they don't use.</li>
+          <li>
+            Adding a new layer (click the button above) means threading the prop
+            through it too.
+          </li>
+          <li>
+            Middle components break encapsulation — they "know" about a value
+            they don't use.
+          </li>
         </ul>
       </div>
     </div>

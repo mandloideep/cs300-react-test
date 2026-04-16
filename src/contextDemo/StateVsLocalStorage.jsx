@@ -6,9 +6,18 @@ function StateOnlyCounter() {
   const [count, setCount] = useState(0);
   return (
     <div className="card">
-      <h4><span className="tag tag-state">state</span> In-memory only</h4>
-      <p>Count: <strong>{count}</strong></p>
-      <button className="btn btn-primary" onClick={() => setCount(c => c + 1)}>+1</button>
+      <h4>
+        <span className="tag tag-state">state</span> In-memory only
+      </h4>
+      <p>
+        Count: <strong>{count}</strong>
+      </p>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((c) => c + 1)}
+      >
+        +1
+      </button>
       <p className="demo-note">Refresh the page → resets to 0.</p>
     </div>
   );
@@ -26,9 +35,18 @@ function PersistedCounter() {
 
   return (
     <div className="card">
-      <h4><span className="tag tag-storage">localStorage</span> Persisted</h4>
-      <p>Count: <strong>{count}</strong></p>
-      <button className="btn btn-primary" onClick={() => setCount(c => c + 1)}>+1</button>
+      <h4>
+        <span className="tag tag-storage">localStorage</span> Persisted
+      </h4>
+      <p>
+        Count: <strong>{count}</strong>
+      </p>
+      <button
+        className="btn btn-primary"
+        onClick={() => setCount((c) => c + 1)}
+      >
+        +1
+      </button>
       <button
         className="btn btn-danger"
         style={{ marginLeft: 8 }}
@@ -49,9 +67,9 @@ export default function StateVsLocalStorage() {
     <div className="demo-subsection">
       <h3>State vs localStorage — the persistence axis</h3>
       <p className="demo-note">
-        Both store data, but on totally different timelines. State lives in RAM and
-        dies on refresh. localStorage lives on disk and survives refreshes (and
-        browser restarts).
+        Both store data, but on totally different timelines. State lives in RAM
+        and dies on refresh. localStorage lives on disk and survives refreshes
+        (and browser restarts).
       </p>
 
       <div className="side-by-side">
@@ -61,7 +79,11 @@ export default function StateVsLocalStorage() {
 
       <table className="compare-table">
         <thead>
-          <tr><th>Question</th><th>useState</th><th>localStorage</th></tr>
+          <tr>
+            <th>Question</th>
+            <th>useState</th>
+            <th>localStorage</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -82,7 +104,9 @@ export default function StateVsLocalStorage() {
           <tr>
             <td>Reactive (UI auto-updates)?</td>
             <td>Yes</td>
-            <td><strong>No</strong> — you must mirror it into state</td>
+            <td>
+              <strong>No</strong> — you must mirror it into state
+            </td>
           </tr>
           <tr>
             <td>What can you store?</td>
@@ -105,15 +129,24 @@ export default function StateVsLocalStorage() {
       <div className="demo-practical">
         <h3>The full picture: three storage layers</h3>
         <ul>
-          <li><strong>useState</strong> — fast, reactive, ephemeral. Default choice for component data.</li>
-          <li><strong>Context</strong> — useState that's <em>shared</em> across many components. Still ephemeral.</li>
-          <li><strong>localStorage</strong> — persistent across refreshes. Not reactive — must be paired with state.</li>
+          <li>
+            <strong>useState</strong> — fast, reactive, ephemeral. Default
+            choice for component data.
+          </li>
+          <li>
+            <strong>Context</strong> — useState that's <em>shared</em> across
+            many components. Still ephemeral.
+          </li>
+          <li>
+            <strong>localStorage</strong> — persistent across refreshes. Not
+            reactive — must be paired with state.
+          </li>
         </ul>
         <p style={{ marginTop: 12 }}>
-          <strong>Combine all three</strong> for things like theme, auth token, or a saved
-          cart: a Context Provider that uses <code>useState</code> seeded from{" "}
-          <code>localStorage</code> and writes back via <code>useEffect</code>. That's
-          exactly what the next section builds.
+          <strong>Combine all three</strong> for things like theme, auth token,
+          or a saved cart: a Context Provider that uses <code>useState</code>{" "}
+          seeded from <code>localStorage</code> and writes back via{" "}
+          <code>useEffect</code>. That's exactly what the next section builds.
         </p>
       </div>
     </div>
