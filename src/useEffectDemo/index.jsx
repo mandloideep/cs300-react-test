@@ -1,4 +1,5 @@
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import RenderVsEffect from "./RenderVsEffect";
 import DependencyArray from "./DependencyArray";
 import CleanupDemo from "./CleanupDemo";
@@ -15,6 +16,69 @@ import DebouncedSearchCode from "./DebouncedSearch.jsx?raw";
 // Side effects = anything that reaches outside the component:
 //   - fetching data, setting timers, subscribing to events, logging, etc.
 // Each section mounts one at a time so the console stays clean.
+
+const NOTES = (
+  <TabNotes
+    title="useEffect — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          <code>useEffect</code> is how your component{" "}
+          <strong>synchronizes with something outside of React</strong> —
+          the DOM, the network, timers, subscriptions, localStorage.
+        </p>
+        <p>
+          It runs <em>after</em> React commits the render to the screen.
+          The dependency array tells React when to re-run it: whenever any
+          listed value changed since the last render.
+        </p>
+        <p>
+          The cleanup function runs <strong>before</strong> the next effect
+          runs and when the component unmounts. It exists so the "outside
+          thing" stays in sync — every subscription gets unsubscribed, every
+          timer gets cleared.
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Use useEffect only for side effects — reaching outside React (network, DOM APIs, timers, subscriptions).",
+      },
+      {
+        kind: "do",
+        text: "List every value from props/state/scope that the effect reads in the dependency array.",
+      },
+      {
+        kind: "do",
+        text: "Return a cleanup function whenever you create a subscription, timer, or listener.",
+      },
+      {
+        kind: "dont",
+        text: "Don't use useEffect to compute a value from other state — compute it during render instead.",
+      },
+      {
+        kind: "dont",
+        text: "Don't leave out dependencies to 'fix' an infinite loop — the bug is that state is set unconditionally.",
+      },
+    ]}
+    gotchas={[
+      "No dependency array = runs after EVERY render. Empty [] = runs once after mount. [x] = runs when x changes.",
+      "Setting state inside an effect triggers another render, which can trigger the effect again. Guard with a condition or pick the right dependencies.",
+      "In StrictMode (dev only), effects mount → cleanup → mount again on purpose. This surfaces missing cleanup bugs.",
+      "An async function cannot be passed to useEffect directly. Define an async function inside and call it, or return a cleanup that cancels.",
+    ]}
+    snippet={`useEffect(() => {
+  const id = setInterval(() => tick(), 1000);
+  return () => clearInterval(id);   // cleanup
+}, []);   // [] = run once on mount, clean up on unmount
+
+useEffect(() => {
+  document.title = \`Count: \${count}\`;
+}, [count]);   // re-run whenever count changes`}
+    snippetLabel="useEffect"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -60,6 +124,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   {
     label: "A. Render vs Effect",
     content: <RenderVsEffect />,

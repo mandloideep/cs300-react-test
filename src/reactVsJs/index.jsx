@@ -1,4 +1,5 @@
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import ImperativeVsDeclarative from "./ImperativeVsDeclarative";
 import TrafficLight from "./TrafficLight";
 import ReRenderingDemo from "./ReRenderingDemo";
@@ -12,6 +13,67 @@ import ReRenderingDemoCode from "./ReRenderingDemo.jsx?raw";
 // This file shows the fundamental difference between how
 // vanilla JavaScript and React approach building UIs.
 // Each section mounts one at a time so the console stays clean.
+
+const NOTES = (
+  <TabNotes
+    title="React vs JavaScript — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          Vanilla JS is <strong>imperative</strong>: you tell the browser{" "}
+          <em>how</em> to change the DOM step by step (find an element, set
+          its text, add a class).
+        </p>
+        <p>
+          React is <strong>declarative</strong>: you describe <em>what</em>{" "}
+          the UI should look like for the current state. React compares your
+          description to the previous one and updates only what changed.
+        </p>
+        <p>
+          The shift: stop thinking "which element do I grab and mutate?" and
+          start thinking "what state drives this piece of UI?"
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Describe the UI as a function of state — render(state) => UI.",
+      },
+      {
+        kind: "do",
+        text: "Change state; let React re-render and update the DOM for you.",
+      },
+      {
+        kind: "do",
+        text: "Keep component functions pure — same props and state in, same JSX out.",
+      },
+      {
+        kind: "dont",
+        text: "Don't call document.getElementById / innerHTML / classList.add inside a component to change UI.",
+      },
+      {
+        kind: "dont",
+        text: "Don't fight re-renders — they are cheap and normal.",
+      },
+    ]}
+    gotchas={[
+      "Your component function runs on every render. Anything expensive or with side effects does not belong in the function body.",
+      "Data flows one way: down via props, up via callbacks. If two siblings need the same data, lift it to the parent.",
+      "'Re-render' means React calls your function again and diffs the output. It does NOT mean the whole DOM is rebuilt.",
+    ]}
+    snippet={`// Imperative (vanilla JS)
+const el = document.getElementById("count");
+el.textContent = n + 1;
+
+// Declarative (React)
+function Counter({ n }) {
+  return <p>{n}</p>;   // just describe the UI
+}
+// When n changes, React updates the DOM for you.`}
+    snippetLabel="Declarative rendering"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -47,6 +109,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   {
     label: "A+B. Imperative vs Declarative",
     content: <ImperativeVsDeclarative />,

@@ -1,4 +1,5 @@
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import ShellPatternDemo from "./ShellPatternDemo";
 import NestingDemo from "./NestingDemo";
 import PropsFlowDemo from "./PropsFlowDemo";
@@ -15,6 +16,71 @@ import LiftingStateDemoCode from "./LiftingStateDemo.jsx?raw";
 // Components are like LEGO blocks — each one does one thing,
 // and you snap them together to build complex UIs.
 // Each section mounts one at a time so the console stays clean.
+
+const NOTES = (
+  <TabNotes
+    title="Composition — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          React components are <strong>LEGO blocks</strong>. Each one does
+          one thing; you snap them together to build complex UIs. You rarely
+          configure a component with a dozen boolean props — instead you
+          pass smaller components into it.
+        </p>
+        <p>
+          Two lifelines: <code>children</code> lets a parent wrap arbitrary
+          content ("shells" like layouts, cards, modals). "Lifting state up"
+          is how two siblings share data — the common parent owns the
+          state and passes it (plus a setter) down as props.
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Prefer <Wrapper>{children}</Wrapper> over <Wrapper variant='x' showY fancy />.",
+      },
+      {
+        kind: "do",
+        text: "Lift state to the nearest common parent when two components must stay in sync.",
+      },
+      {
+        kind: "do",
+        text: "Pass data down through props, events back up through callbacks.",
+      },
+      {
+        kind: "dont",
+        text: "Don't duplicate state in siblings — one source of truth, shared via the parent.",
+      },
+      {
+        kind: "dont",
+        text: "Don't reach for Context until prop-passing becomes genuinely painful (usually 3+ levels).",
+      },
+    ]}
+    gotchas={[
+      "children is just a prop. You can accept other components as named props too (header, sidebar, footer) — the 'slots' pattern.",
+      "Passing a new object/array/function on each render causes children to see 'changed' props. Memoize only when it matters for perf.",
+      "Lifting state up is the default fix for 'these two things need to talk'. Context is for wide, stable values, not sibling sync.",
+    ]}
+    snippet={`// Shell pattern — accepts any children
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+
+// Lifting state up
+function Parent() {
+  const [value, setValue] = useState("");
+  return (
+    <>
+      <Input value={value} onChange={setValue} />
+      <Preview value={value} />
+    </>
+  );
+}`}
+    snippetLabel="Children + lifting state"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -53,6 +119,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   {
     label: "A. Shell Pattern",
     content: <ShellPatternDemo />,

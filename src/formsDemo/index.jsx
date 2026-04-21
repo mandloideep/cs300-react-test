@@ -3,6 +3,7 @@
 // ============================================================
 
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import ControlledText from "./ControlledText";
 import CheckboxRadioSelect from "./CheckboxRadioSelect";
 import MultiFieldForm from "./MultiFieldForm";
@@ -13,6 +14,72 @@ import CheckboxRadioSelectCode from "./CheckboxRadioSelect.jsx?raw";
 import MultiFieldFormCode from "./MultiFieldForm.jsx?raw";
 import ValidationCode from "./Validation.jsx?raw";
 import FormSubmissionCode from "./FormSubmission.jsx?raw";
+
+const NOTES = (
+  <TabNotes
+    title="Controlled Forms — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          In a controlled form, <strong>React state is the source of
+          truth</strong>. The input's <code>value</code> comes from state,
+          and every keystroke calls <code>onChange</code> to update that
+          state. The DOM input never holds data on its own.
+        </p>
+        <p>
+          Submission is just another event. On <code>onSubmit</code> you
+          call <code>preventDefault()</code> (so the page doesn't reload),
+          read the state, validate, then do whatever comes next (fetch,
+          route change, etc.).
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Pair every input with value={state} AND onChange={handler}.",
+      },
+      {
+        kind: "do",
+        text: "Call e.preventDefault() inside onSubmit to stop the browser navigating.",
+      },
+      {
+        kind: "do",
+        text: "Keep related fields in one state object, or split them — pick whichever makes updates cleaner.",
+      },
+      {
+        kind: "dont",
+        text: "Don't pass only value (without onChange) — React makes the field read-only.",
+      },
+      {
+        kind: "dont",
+        text: "Don't reach into the DOM with document.getElementById for values; read from state.",
+      },
+    ]}
+    gotchas={[
+      "Checkboxes use `checked` instead of `value`, and you read e.target.checked.",
+      "<select> is controlled by setting `value` on the <select> itself, not `selected` on <option>.",
+      "Number inputs still give you a string from e.target.value — convert with Number(...) if you need a number.",
+      "Always pass a non-null initial value (like '' for text) — React warns when switching between controlled and uncontrolled.",
+    ]}
+    snippet={`function NameForm() {
+  const [name, setName] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submitted:", name);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input value={name} onChange={e => setName(e.target.value)} />
+      <button type="submit">Save</button>
+    </form>
+  );
+}`}
+    snippetLabel="Controlled input"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -48,6 +115,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   {
     label: "A. Controlled Text",
     content: <ControlledText />,

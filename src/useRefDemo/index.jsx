@@ -1,4 +1,5 @@
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import RefVsState from "./RefVsState";
 import DomAccess from "./DomAccess";
 import PreviousValue from "./PreviousValue";
@@ -14,6 +15,63 @@ import StopwatchCode from "./Stopwatch.jsx?raw";
 // useRef gives you a "box" (.current) that persists across renders
 // but DOES NOT trigger a re-render when changed.
 // Each section mounts one at a time so the console stays clean.
+
+const NOTES = (
+  <TabNotes
+    title="useRef — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          A ref is a <strong>box</strong>. You read and write its contents
+          through <code>.current</code>. The box survives every re-render,
+          but writing to it does <em>not</em> trigger a re-render.
+        </p>
+        <p>
+          Two uses come up constantly: (1) get a handle to a DOM node via{" "}
+          <code>ref={"{inputRef}"}</code>, and (2) stash a mutable value the
+          UI does not need to show (timer IDs, previous values, caches).
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Use useState when changing the value should update the screen.",
+      },
+      {
+        kind: "do",
+        text: "Use useRef when the value must persist across renders but does NOT need to re-render.",
+      },
+      {
+        kind: "do",
+        text: "Attach to a DOM node with the ref prop: <input ref={inputRef} /> → inputRef.current is the element.",
+      },
+      {
+        kind: "dont",
+        text: "Don't read or write ref.current during render — do it in event handlers or effects.",
+      },
+      {
+        kind: "dont",
+        text: "Don't use a ref to cache derived data that the UI displays — that's state.",
+      },
+    ]}
+    gotchas={[
+      "Updating ref.current does not re-render. If the screen should react to the change, that value belongs in useState.",
+      "Refs to DOM nodes are null on the first render — they're set after React commits. Safe to use in effects or event handlers.",
+      "The initial value useRef(x) only runs on the first render. Same pattern as useState.",
+    ]}
+    snippet={`// DOM ref
+const inputRef = useRef(null);
+useEffect(() => { inputRef.current?.focus(); }, []);
+return <input ref={inputRef} />;
+
+// Mutable value ref (timer ID)
+const timerRef = useRef(null);
+timerRef.current = setInterval(tick, 1000);
+clearInterval(timerRef.current);`}
+    snippetLabel="useRef"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -53,6 +111,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   { label: "A. Ref vs State", content: <RefVsState />, code: RefVsStateCode },
   { label: "B. DOM Access", content: <DomAccess />, code: DomAccessCode },
   {

@@ -3,6 +3,7 @@
 // ============================================================
 
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import ObjectState from "./ObjectState";
 import ArrayAdd from "./ArrayAdd";
 import ArrayRemove from "./ArrayRemove";
@@ -11,6 +12,63 @@ import ObjectStateCode from "./ObjectState.jsx?raw";
 import ArrayAddCode from "./ArrayAdd.jsx?raw";
 import ArrayRemoveCode from "./ArrayRemove.jsx?raw";
 import ArrayToggleCode from "./ArrayToggle.jsx?raw";
+
+const NOTES = (
+  <TabNotes
+    title="Object & Array State — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          React compares state by <strong>reference</strong>. Mutating an
+          object or array in place keeps the same reference, so React
+          decides nothing changed and skips the re-render.
+        </p>
+        <p>
+          The pattern: <strong>build a new copy with the change applied</strong>, then
+          pass it to the setter. Spread, map, filter — never push, splice,
+          or direct assignment.
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Object update: setObj({ ...obj, field: newValue }).",
+      },
+      {
+        kind: "do",
+        text: "Array add: setArr([...arr, item]).",
+      },
+      {
+        kind: "do",
+        text: "Array remove: setArr(arr.filter(x => x.id !== id)).",
+      },
+      {
+        kind: "do",
+        text: "Array toggle/update: setArr(arr.map(x => x.id === id ? { ...x, done: !x.done } : x)).",
+      },
+      {
+        kind: "dont",
+        text: "Never: arr.push(...), arr[i] = ..., obj.field = ..., arr.sort() on state.",
+      },
+    ]}
+    gotchas={[
+      "Nested objects need deep copies — spread only shallows one level. setObj({ ...obj, inner: { ...obj.inner, x: 1 } }).",
+      "sort() and reverse() mutate in place. Use [...arr].sort(...) or arr.toSorted() to copy first.",
+      "Every item in a rendered list needs a stable `key` prop. Don't use the index unless the list never reorders.",
+    ]}
+    snippet={`// Object — update one field, preserve the rest
+setUser({ ...user, email: "new@x.com" });
+
+// Array — add, remove, update by id
+setTodos([...todos, { id, text, done: false }]);
+setTodos(todos.filter(t => t.id !== id));
+setTodos(todos.map(t =>
+  t.id === id ? { ...t, done: !t.done } : t
+));`}
+    snippetLabel="Immutable updates"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -46,6 +104,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   { label: "A. Object State", content: <ObjectState />, code: ObjectStateCode },
   { label: "B. Array Add", content: <ArrayAdd />, code: ArrayAddCode },
   { label: "C. Array Remove", content: <ArrayRemove />, code: ArrayRemoveCode },

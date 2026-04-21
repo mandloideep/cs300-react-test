@@ -3,10 +3,85 @@
 // ============================================================
 
 import SectionStepper from "../SectionStepper";
+import TabNotes from "../TabNotes";
 import FetchOnMount from "./FetchOnMount";
 import PostExample from "./PostExample";
 import FetchOnMountCode from "./FetchOnMount.jsx?raw";
 import PostExampleCode from "./PostExample.jsx?raw";
+
+const NOTES = (
+  <TabNotes
+    title="Fetching Data — Mental Model"
+    mentalModel={
+      <>
+        <p>
+          A fetch has <strong>four states</strong>: idle, loading, success
+          (data), and error. The UI must know which one it's in so it can
+          show a spinner, the data, or an error message. Track them
+          explicitly — don't try to infer "loading" from "data is falsy".
+        </p>
+        <p>
+          Fetches are <strong>side effects</strong>, so they go in{" "}
+          <code>useEffect</code>, never during render. The request starts
+          after the component mounts; the response arrives later and sets
+          state, which re-renders with the data.
+        </p>
+        <p>
+          If the component unmounts (or the input changes) while a request
+          is in flight, cancel the old one with <code>AbortController</code>{" "}
+          — otherwise the late response overwrites fresh data.
+        </p>
+      </>
+    }
+    rules={[
+      {
+        kind: "do",
+        text: "Track loading, data, and error as separate state (or one status union).",
+      },
+      {
+        kind: "do",
+        text: "Fetch inside useEffect, not in the component body.",
+      },
+      {
+        kind: "do",
+        text: "Return a cleanup that aborts the request when the component unmounts or dependencies change.",
+      },
+      {
+        kind: "do",
+        text: "Check response.ok before parsing — fetch does NOT throw on 4xx/5xx.",
+      },
+      {
+        kind: "dont",
+        text: "Don't assume data is loaded just because there's no error — always branch on loading.",
+      },
+    ]}
+    gotchas={[
+      "fetch only rejects on network errors. A 404 or 500 still resolves — check response.ok yourself.",
+      "Race conditions: if the user types 'a' then 'ab', the 'a' response may arrive last. AbortController cleanup prevents this.",
+      "Don't call setState after unmount — React warns. AbortController + cleanup avoids it.",
+      "Async functions can't be passed directly to useEffect. Define an inner async function and call it.",
+    ]}
+    snippet={`useEffect(() => {
+  const ctrl = new AbortController();
+
+  (async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(url, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(res.status);
+      setData(await res.json());
+    } catch (e) {
+      if (e.name !== "AbortError") setError(e);
+    } finally {
+      setLoading(false);
+    }
+  })();
+
+  return () => ctrl.abort();   // cancel on unmount / dep change
+}, [url]);`}
+    snippetLabel="Fetch with loading/error + abort"
+  />
+);
 
 const PRACTICAL = (
   <div className="demo-practical">
@@ -46,6 +121,7 @@ const PRACTICAL = (
 );
 
 const sections = [
+  { label: "Notes", content: NOTES },
   {
     label: "A. Fetch on Mount",
     content: <FetchOnMount />,

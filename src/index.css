@@ -658,3 +658,62 @@ h1 {
 .router-demo-container .not-found h2 {
   color: #e74c3c;
 }
+
+/* ===== Tab Notes ===== */
+.tab-notes {
+  max-width: 900px;
+}
+.tab-notes h3 {
+  color: var(--primary-color);
+  margin-top: 0;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 6px;
+}
+.notes-block {
+  margin: 20px 0;
+}
+.notes-block h4 {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+  margin-bottom: 8px;
+}
+.notes-mental p {
+  line-height: 1.6;
+  margin: 8px 0;
+}
+.notes-rules ul,
+.notes-gotchas ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.notes-rules li {
+  margin: 6px 0;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+.rule-mark {
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+.rule-do .rule-mark {
+  color: #2ecc71;
+}
+.rule-dont .rule-mark {
+  color: #e74c3c;
+}
+.notes-gotchas li {
+  background: #fff8e1;
+  border-left: 4px solid #f5a623;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.5;
+}
+.notes-snippet {
+  margin-top: 16px;
+}
