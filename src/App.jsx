@@ -8,6 +8,7 @@ import ReactVsJs from "./reactVsJs";
 import UseStateDemo from "./useStateDemo";
 import UseEffectDemo from "./useEffectDemo";
 import UseRefDemo from "./useRefDemo";
+import UseCallbackDemo from "./useCallbackDemo";
 import CompositionDemo from "./compositionDemo";
 import FormsDemo from "./formsDemo";
 import LocalStorageDemo from "./localStorageDemo";
@@ -17,6 +18,7 @@ import KeyboardDemo from "./keyboardDemo";
 import MistakesDemo from "./mistakesDemo";
 import BookmarksApp from "./bookmarksApp";
 import DeployGuide from "./deployGuide";
+import DeployDemo from "./deployDemo";
 import ReactRouterDemo from "./reactRouterDemo";
 import ContextDemo from "./contextDemo";
 
@@ -26,6 +28,7 @@ const TABS = [
   { id: "useState", label: "useState" },
   { id: "useEffect", label: "useEffect" },
   { id: "useRef", label: "useRef" },
+  { id: "useCallback", label: "useCallback" },
   { id: "composition", label: "Composition" },
   { id: "lifecycle", label: "Lifecycle" },
   { id: "window", label: "Window" },
@@ -37,7 +40,8 @@ const TABS = [
   { id: "keyboard", label: "Keyboard" },
   { id: "mistakes", label: "Mistakes" },
   { id: "bookmarks", label: "Bookmarks App" },
-  { id: "deploy", label: "Deploy Guide" },
+  { id: "deploy", label: "Deploy Guide (GH Pages)" },
+  { id: "deployVercel", label: "Deploy Guide (Vercel)" },
   { id: "context", label: "Context API" },
   { id: "reactRouter", label: "React Router" },
 ];
@@ -94,6 +98,7 @@ function App() {
       {activeDemo === "useState" && <UseStateDemo />}
       {activeDemo === "useEffect" && <UseEffectDemo />}
       {activeDemo === "useRef" && <UseRefDemo />}
+      {activeDemo === "useCallback" && <UseCallbackDemo />}
       {activeDemo === "composition" && <CompositionDemo />}
       {activeDemo === "lifecycle" && <LifecycleDemo />}
       {activeDemo === "window" && <WindowDemo />}
@@ -105,6 +110,7 @@ function App() {
       {activeDemo === "mistakes" && <MistakesDemo />}
       {activeDemo === "bookmarks" && <BookmarksApp />}
       {activeDemo === "deploy" && <DeployGuide />}
+      {activeDemo === "deployVercel" && <DeployDemo />}
       {activeDemo === "reactRouter" && <ReactRouterDemo />}
       {activeDemo === "context" && <ContextDemo />}
       {activeDemo === "home" && (
