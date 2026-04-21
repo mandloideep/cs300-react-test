@@ -1,67 +1,38 @@
 import { useState } from "react";
-import ComponentTree from "./ComponentTree";
-
-function buildTree(user, deep) {
-  const badge = {
-    name: "UserBadge",
-    role: "leaf",
-    prop: "user",
-    propValue: "user",
-    note: "Only this leaf actually reads user.name / user.role",
-    display: (
-      <>
-        <strong>Logged in as:</strong> {user.name} ({user.role})
-      </>
-    ),
-  };
-
-  const menu = {
-    name: "UserMenu",
-    role: "passthrough",
-    prop: "user",
-    note: "Doesn't use user — only forwards it to UserBadge",
-    children: [badge],
-  };
-
-  const header = {
-    name: "Header",
-    role: "passthrough",
-    prop: "user",
-    note: "Doesn't use user — only forwards it",
-    children: [menu],
-  };
-
-  const layoutChild = deep
-    ? {
-        name: "ExtraLayer",
-        role: "passthrough",
-        prop: "user",
-        note: "A new layer — now it ALSO has to accept & forward user",
-        children: [header],
-      }
-    : header;
-
-  const layout = {
-    name: "Layout",
-    role: "passthrough",
-    prop: "user",
-    note: "Doesn't use user — only forwards it",
-    children: [layoutChild],
-  };
-
-  return {
-    name: "App",
-    role: "owner",
-    prop: "user",
-    propValue: `{ name: "${user.name}", role: "${user.role}" }`,
-    note: "App owns the user state with useState. It has to pass user down through every layer.",
-    children: [layout],
-  };
-}
+import ComponentTree, { CompNode } from "./ComponentTree";
 
 export default function PropDrillingPain() {
   const [user] = useState({ name: "Ada Lovelace", role: "admin" });
   const [deep, setDeep] = useState(false);
+
+  const headerSubtree = (
+    <CompNode
+      name="Header"
+      role="passthrough"
+      prop="user"
+      note="Doesn't use user — only forwards it"
+    >
+      <CompNode
+        name="UserMenu"
+        role="passthrough"
+        prop="user"
+        note="Doesn't use user — only forwards it to UserBadge"
+      >
+        <CompNode
+          name="UserBadge"
+          role="leaf"
+          prop="user"
+          propValue="user"
+          note="Only this leaf actually reads user.name / user.role"
+          display={
+            <>
+              <strong>Logged in as:</strong> {user.name} ({user.role})
+            </>
+          }
+        />
+      </CompNode>
+    </CompNode>
+  );
 
   return (
     <div className="demo-subsection">
@@ -77,7 +48,35 @@ export default function PropDrillingPain() {
       </button>
 
       <div style={{ marginTop: 16 }}>
-        <ComponentTree root={buildTree(user, deep)} />
+        <ComponentTree>
+          <CompNode
+            name="App"
+            role="owner"
+            prop="user"
+            propValue={`{ name: "${user.name}", role: "${user.role}" }`}
+            note="App owns the user state with useState. It has to pass user down through every layer."
+          >
+            <CompNode
+              name="Layout"
+              role="passthrough"
+              prop="user"
+              note="Doesn't use user — only forwards it"
+            >
+              {deep ? (
+                <CompNode
+                  name="ExtraLayer"
+                  role="passthrough"
+                  prop="user"
+                  note="A new layer — now it ALSO has to accept & forward user"
+                >
+                  {headerSubtree}
+                </CompNode>
+              ) : (
+                headerSubtree
+              )}
+            </CompNode>
+          </CompNode>
+        </ComponentTree>
       </div>
 
       <div className="demo-practical">

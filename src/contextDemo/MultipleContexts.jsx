@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import ComponentTree from "./ComponentTree";
+import ComponentTree, { CompNode } from "./ComponentTree";
 
 const ThemeContext = createContext(null);
 const UserContext = createContext(null);
@@ -89,55 +89,6 @@ function CartBadgeLive() {
   );
 }
 
-const tree = {
-  name: "ThemeProvider",
-  role: "provider",
-  hook: "useState('light') + <ThemeContext.Provider>",
-  propValue: "{ theme, setTheme }",
-  note: "Owns theme state and provides it via ThemeContext.",
-  children: [
-    {
-      name: "UserProvider",
-      role: "provider",
-      hook: "useState({ name, role }) + <UserContext.Provider>",
-      propValue: "{ user, setUser }",
-      note: "Owns user state and provides it via UserContext.",
-      children: [
-        {
-          name: "CartProvider",
-          role: "provider",
-          hook: "useState([]) + <CartContext.Provider>",
-          propValue: "{ items, add, clear }",
-          note: "Owns cart state and provides it via CartContext.",
-          children: [
-            {
-              name: "ThemeBadge",
-              role: "consumer",
-              hook: "useContext(ThemeContext)",
-              note: "Reads only theme. Ignores user/cart changes.",
-              display: <ThemeBadgeLive />,
-            },
-            {
-              name: "UserBadge",
-              role: "consumer",
-              hook: "useContext(UserContext)",
-              note: "Reads only user. Ignores theme/cart changes.",
-              display: <UserBadgeLive />,
-            },
-            {
-              name: "CartBadge",
-              role: "consumer",
-              hook: "useContext(CartContext)",
-              note: "Reads only cart. Ignores theme/user changes.",
-              display: <CartBadgeLive />,
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
 export default function MultipleContexts() {
   return (
     <div className="demo-subsection">
@@ -151,7 +102,53 @@ export default function MultipleContexts() {
       <ThemeProvider>
         <UserProvider>
           <CartProvider>
-            <ComponentTree root={tree} />
+            <ComponentTree>
+              <CompNode
+                name="ThemeProvider"
+                role="provider"
+                hook="useState('light') + <ThemeContext.Provider>"
+                propValue="{ theme, setTheme }"
+                note="Owns theme state and provides it via ThemeContext."
+              >
+                <CompNode
+                  name="UserProvider"
+                  role="provider"
+                  hook="useState({ name, role }) + <UserContext.Provider>"
+                  propValue="{ user, setUser }"
+                  note="Owns user state and provides it via UserContext."
+                >
+                  <CompNode
+                    name="CartProvider"
+                    role="provider"
+                    hook="useState([]) + <CartContext.Provider>"
+                    propValue="{ items, add, clear }"
+                    note="Owns cart state and provides it via CartContext."
+                  >
+                    <CompNode
+                      name="ThemeBadge"
+                      role="consumer"
+                      hook="useContext(ThemeContext)"
+                      note="Reads only theme. Ignores user/cart changes."
+                      display={<ThemeBadgeLive />}
+                    />
+                    <CompNode
+                      name="UserBadge"
+                      role="consumer"
+                      hook="useContext(UserContext)"
+                      note="Reads only user. Ignores theme/cart changes."
+                      display={<UserBadgeLive />}
+                    />
+                    <CompNode
+                      name="CartBadge"
+                      role="consumer"
+                      hook="useContext(CartContext)"
+                      note="Reads only cart. Ignores theme/user changes."
+                      display={<CartBadgeLive />}
+                    />
+                  </CompNode>
+                </CompNode>
+              </CompNode>
+            </ComponentTree>
           </CartProvider>
         </UserProvider>
       </ThemeProvider>

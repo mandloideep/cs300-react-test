@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import ComponentTree from "./ComponentTree";
+import ComponentTree, { CompNode } from "./ComponentTree";
 
 const UserContext = createContext(null);
 
@@ -10,53 +10,6 @@ function UserBadgeLive() {
       <strong>Logged in as:</strong> {user.name} ({user.role})
     </>
   );
-}
-
-function buildTree(user) {
-  return {
-    name: "App",
-    role: "owner",
-    hook: `useState({ name: "${user.name}", role: "${user.role}" })`,
-    note: "App owns the user state AND wraps its tree in the Provider.",
-    children: [
-      {
-        name: "UserContext.Provider",
-        role: "provider",
-        propValue: "user",
-        note: "Distributes user to any descendant — no props needed on the middle layers.",
-        children: [
-          {
-            name: "Layout",
-            role: "unaware",
-            note: "No user prop. Doesn't know user exists.",
-            children: [
-              {
-                name: "Header",
-                role: "unaware",
-                note: "No user prop. Doesn't know user exists.",
-                children: [
-                  {
-                    name: "UserMenu",
-                    role: "unaware",
-                    note: "No user prop. Doesn't know user exists.",
-                    children: [
-                      {
-                        name: "UserBadge",
-                        role: "consumer",
-                        hook: "useContext(UserContext)",
-                        note: "Reaches up to the Provider directly — skips every layer above.",
-                        display: <UserBadgeLive />,
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
 }
 
 export default function FirstContext() {
@@ -95,7 +48,47 @@ export default function FirstContext() {
       </div>
 
       <UserContext.Provider value={user}>
-        <ComponentTree root={buildTree(user)} />
+        <ComponentTree>
+          <CompNode
+            name="App"
+            role="owner"
+            hook={`useState({ name: "${user.name}", role: "${user.role}" })`}
+            note="App owns the user state AND wraps its tree in the Provider."
+          >
+            <CompNode
+              name="UserContext.Provider"
+              role="provider"
+              propValue="user"
+              note="Distributes user to any descendant — no props needed on the middle layers."
+            >
+              <CompNode
+                name="Layout"
+                role="unaware"
+                note="No user prop. Doesn't know user exists."
+              >
+                <CompNode
+                  name="Header"
+                  role="unaware"
+                  note="No user prop. Doesn't know user exists."
+                >
+                  <CompNode
+                    name="UserMenu"
+                    role="unaware"
+                    note="No user prop. Doesn't know user exists."
+                  >
+                    <CompNode
+                      name="UserBadge"
+                      role="consumer"
+                      hook="useContext(UserContext)"
+                      note="Reaches up to the Provider directly — skips every layer above."
+                      display={<UserBadgeLive />}
+                    />
+                  </CompNode>
+                </CompNode>
+              </CompNode>
+            </CompNode>
+          </CompNode>
+        </ComponentTree>
       </UserContext.Provider>
 
       <div className="demo-practical">

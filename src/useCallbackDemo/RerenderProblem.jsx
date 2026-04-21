@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import ComponentTree, { CompNode } from "../contextDemo/ComponentTree";
 
 function SearchBar({ onSearch }) {
   const renderCount = useRef(0);
@@ -70,8 +71,29 @@ export default function RerenderProblem() {
         </button>
       </div>
 
-      <SearchBar onSearch={handleSearch} />
-      <ExpensiveList items={items} />
+      <ComponentTree>
+        <CompNode
+          name="RerenderProblem"
+          role="owner"
+          hook="useState(count) + useState(searchTerm)"
+          note="Re-renders on every count change — re-creates handleSearch and items each time."
+        >
+          <CompNode
+            name="SearchBar"
+            role="leaf"
+            prop="onSearch"
+            note="Re-renders because onSearch is a new function reference every parent render."
+            display={<SearchBar onSearch={handleSearch} />}
+          />
+          <CompNode
+            name="ExpensiveList"
+            role="leaf"
+            prop="items"
+            note="Re-renders because items is a new array every parent render."
+            display={<ExpensiveList items={items} />}
+          />
+        </CompNode>
+      </ComponentTree>
 
       {searchTerm && (
         <p style={{ marginTop: 8, color: "#888" }}>

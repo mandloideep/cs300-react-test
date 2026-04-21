@@ -31,23 +31,23 @@ const ROLE_STYLES = {
   },
 };
 
-function Signature({ node }) {
-  const muted = node.role === "unaware";
+function Signature({ name, role, prop, propValue }) {
+  const muted = role === "unaware";
   const color = muted
     ? "#9ca3af"
-    : node.role === "leaf" || node.role === "consumer"
+    : role === "leaf" || role === "consumer"
       ? "#16a34a"
       : "#6b7280";
 
-  if (node.role === "provider") {
+  if (role === "provider") {
     return (
       <span style={{ fontFamily: "monospace", fontWeight: 600 }}>
-        &lt;{node.name}
-        {node.propValue && (
+        &lt;{name}
+        {propValue && (
           <span style={{ color: "#7c3aed", fontWeight: 400 }}>
             {" "}
             value={"{"}
-            {node.propValue}
+            {propValue}
             {"}"}
           </span>
         )}
@@ -56,8 +56,7 @@ function Signature({ node }) {
     );
   }
 
-  const showProp =
-    node.prop && node.role !== "unaware" && node.role !== "consumer";
+  const showProp = prop && role !== "unaware" && role !== "consumer";
 
   return (
     <span
@@ -67,12 +66,12 @@ function Signature({ node }) {
         color: muted ? "#9ca3af" : "inherit",
       }}
     >
-      &lt;{node.name}
+      &lt;{name}
       {showProp && (
         <span style={{ color, fontWeight: 400 }}>
           {" "}
-          {node.prop}={"{"}
-          {node.propValue ?? node.prop}
+          {prop}={"{"}
+          {propValue ?? prop}
           {"}"}
         </span>
       )}
@@ -101,9 +100,17 @@ function Hook({ hook }) {
   );
 }
 
-function Node({ node }) {
-  const style = ROLE_STYLES[node.role] ?? ROLE_STYLES.passthrough;
-  const hasChildren = node.children && node.children.length > 0;
+export function CompNode({
+  name,
+  role,
+  prop,
+  propValue,
+  note,
+  hook,
+  display,
+  children,
+}) {
+  const style = ROLE_STYLES[role] ?? ROLE_STYLES.passthrough;
 
   return (
     <div
@@ -124,7 +131,7 @@ function Node({ node }) {
           flexWrap: "wrap",
         }}
       >
-        <Signature node={node} />
+        <Signature name={name} role={role} prop={prop} propValue={propValue} />
         <span
           style={{
             fontSize: 11,
@@ -139,21 +146,21 @@ function Node({ node }) {
         </span>
       </div>
 
-      <Hook hook={node.hook} />
+      <Hook hook={hook} />
 
-      {node.note && (
+      {note && (
         <div
           style={{
             fontSize: 13,
-            color: node.role === "unaware" ? "#9ca3af" : "#4b5563",
+            color: role === "unaware" ? "#9ca3af" : "#4b5563",
             marginTop: 4,
           }}
         >
-          {node.note}
+          {note}
         </div>
       )}
 
-      {node.display && (
+      {display && (
         <div
           style={{
             marginTop: 8,
@@ -164,16 +171,15 @@ function Node({ node }) {
             fontSize: 14,
           }}
         >
-          {node.display}
+          {display}
         </div>
       )}
 
-      {hasChildren &&
-        node.children.map((child, i) => <Node key={i} node={child} />)}
+      {children}
     </div>
   );
 }
 
-export default function ComponentTree({ root }) {
-  return <Node node={root} />;
+export default function ComponentTree({ children }) {
+  return <>{children}</>;
 }

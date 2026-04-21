@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import ComponentTree from "./ComponentTree";
+import ComponentTree, { CompNode } from "./ComponentTree";
 
 const THEME_KEY = "cs300:demo:theme";
 const ThemeContext = createContext(null);
@@ -44,58 +44,6 @@ function DeepChildLive() {
   );
 }
 
-const tree = {
-  name: "ThemeProvider",
-  role: "owner",
-  hook: "useState + useEffect (hydrates & persists to localStorage)",
-  note: "Owns the theme state and keeps it synced with localStorage.",
-  children: [
-    {
-      name: "ThemeContext.Provider",
-      role: "provider",
-      propValue: "{ theme, toggle }",
-      note: "Shares theme + toggle with any descendant.",
-      children: [
-        {
-          name: "ToggleButton",
-          role: "consumer",
-          hook: "useContext(ThemeContext)",
-          note: "Shallow consumer — reads theme & calls toggle.",
-          display: <ToggleButtonLive />,
-        },
-        {
-          name: "MiddleA",
-          role: "unaware",
-          note: "No theme prop. Doesn't know theme exists.",
-          children: [
-            {
-              name: "MiddleB",
-              role: "unaware",
-              note: "Still no theme prop.",
-              children: [
-                {
-                  name: "MiddleC",
-                  role: "unaware",
-                  note: "Still no theme prop.",
-                  children: [
-                    {
-                      name: "DeepChild",
-                      role: "consumer",
-                      hook: "useContext(ThemeContext)",
-                      note: "4 layers down — reaches up to the Provider directly.",
-                      display: <DeepChildLive />,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
 export default function ContextPlusLocalStorage() {
   return (
     <div className="demo-subsection">
@@ -107,7 +55,54 @@ export default function ContextPlusLocalStorage() {
       </p>
 
       <ThemeProvider>
-        <ComponentTree root={tree} />
+        <ComponentTree>
+          <CompNode
+            name="ThemeProvider"
+            role="owner"
+            hook="useState + useEffect (hydrates & persists to localStorage)"
+            note="Owns the theme state and keeps it synced with localStorage."
+          >
+            <CompNode
+              name="ThemeContext.Provider"
+              role="provider"
+              propValue="{ theme, toggle }"
+              note="Shares theme + toggle with any descendant."
+            >
+              <CompNode
+                name="ToggleButton"
+                role="consumer"
+                hook="useContext(ThemeContext)"
+                note="Shallow consumer — reads theme & calls toggle."
+                display={<ToggleButtonLive />}
+              />
+              <CompNode
+                name="MiddleA"
+                role="unaware"
+                note="No theme prop. Doesn't know theme exists."
+              >
+                <CompNode
+                  name="MiddleB"
+                  role="unaware"
+                  note="Still no theme prop."
+                >
+                  <CompNode
+                    name="MiddleC"
+                    role="unaware"
+                    note="Still no theme prop."
+                  >
+                    <CompNode
+                      name="DeepChild"
+                      role="consumer"
+                      hook="useContext(ThemeContext)"
+                      note="4 layers down — reaches up to the Provider directly."
+                      display={<DeepChildLive />}
+                    />
+                  </CompNode>
+                </CompNode>
+              </CompNode>
+            </CompNode>
+          </CompNode>
+        </ComponentTree>
       </ThemeProvider>
 
       <div className="demo-practical">
