@@ -23,13 +23,13 @@ const NOTES = (
       <>
         <p>
           A ref is a <strong>box</strong>. You read and write its contents
-          through <code>.current</code>. The box survives every re-render,
-          but writing to it does <em>not</em> trigger a re-render.
+          through <code>.current</code>. The box survives every re-render, but
+          writing to it does <em>not</em> trigger a re-render.
         </p>
         <p>
           Two uses come up constantly: (1) get a handle to a DOM node via{" "}
-          <code>ref={"{inputRef}"}</code>, and (2) stash a mutable value the
-          UI does not need to show (timer IDs, previous values, caches).
+          <code>ref={"{inputRef}"}</code>, and (2) stash a mutable value the UI
+          does not need to show (timer IDs, previous values, caches).
         </p>
       </>
     }

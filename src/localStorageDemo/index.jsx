@@ -19,15 +19,15 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          <code>localStorage</code> is a browser-provided <strong>string
-          key/value store</strong> that survives page reloads and tab
-          closes. It lives per origin (domain) and is synchronous.
+          <code>localStorage</code> is a browser-provided{" "}
+          <strong>string key/value store</strong> that survives page reloads and
+          tab closes. It lives per origin (domain) and is synchronous.
         </p>
         <p>
-          Pair it with React like this: <strong>read once</strong> when
-          state initializes (lazy init in useState), <strong>write</strong>{" "}
-          inside a useEffect that depends on the value. The UI stays in
-          React state; localStorage is just a persistence layer next to it.
+          Pair it with React like this: <strong>read once</strong> when state
+          initializes (lazy init in useState), <strong>write</strong> inside a
+          useEffect that depends on the value. The UI stays in React state;
+          localStorage is just a persistence layer next to it.
         </p>
       </>
     }

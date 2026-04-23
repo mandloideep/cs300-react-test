@@ -25,22 +25,22 @@ const NOTES = (
       <>
         <p>
           Context lets a value{" "}
-          <strong>teleport from a provider to any descendant</strong>{" "}
-          without being passed through every prop in between. Think: theme,
-          current user, language — things many components deep in the tree
-          need to read but nobody in between cares about.
+          <strong>teleport from a provider to any descendant</strong> without
+          being passed through every prop in between. Think: theme, current
+          user, language — things many components deep in the tree need to read
+          but nobody in between cares about.
         </p>
         <p>
           Shape: <code>createContext(defaultValue)</code> gives you a{" "}
-          <code>Provider</code> that wraps a subtree and a value consumers
-          read via <code>useContext</code>. The provider owns the state;
-          every consumer reads the same value.
+          <code>Provider</code> that wraps a subtree and a value consumers read
+          via <code>useContext</code>. The provider owns the state; every
+          consumer reads the same value.
         </p>
         <p>
           Cost: <strong>every consumer re-renders</strong> whenever the
-          provider's value changes — including any child whose own props
-          didn't change. Keep contexts narrow; split them when unrelated
-          values change at different rates.
+          provider's value changes — including any child whose own props didn't
+          change. Keep contexts narrow; split them when unrelated values change
+          at different rates.
         </p>
       </>
     }

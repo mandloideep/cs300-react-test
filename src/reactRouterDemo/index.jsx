@@ -29,16 +29,16 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          The URL is <strong>state</strong>. React Router reads the URL,
-          matches it against your <code>&lt;Routes&gt;</code>, and renders
-          the matching <code>&lt;Route&gt;</code>'s element. Change the URL
-          (via <code>&lt;Link&gt;</code> or <code>useNavigate</code>) and
-          React re-renders the matching route — no page reload.
+          The URL is <strong>state</strong>. React Router reads the URL, matches
+          it against your <code>&lt;Routes&gt;</code>, and renders the matching{" "}
+          <code>&lt;Route&gt;</code>'s element. Change the URL (via{" "}
+          <code>&lt;Link&gt;</code> or <code>useNavigate</code>) and React
+          re-renders the matching route — no page reload.
         </p>
         <p>
           Routes nest like components. A parent layout renders{" "}
-          <code>&lt;Outlet /&gt;</code> where its child route should
-          appear. Dynamic parts of the URL (<code>:id</code>) arrive as{" "}
+          <code>&lt;Outlet /&gt;</code> where its child route should appear.
+          Dynamic parts of the URL (<code>:id</code>) arrive as{" "}
           <code>useParams</code>; query strings come from{" "}
           <code>useSearchParams</code>.
         </p>

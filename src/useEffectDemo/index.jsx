@@ -24,19 +24,19 @@ const NOTES = (
       <>
         <p>
           <code>useEffect</code> is how your component{" "}
-          <strong>synchronizes with something outside of React</strong> —
-          the DOM, the network, timers, subscriptions, localStorage.
+          <strong>synchronizes with something outside of React</strong> — the
+          DOM, the network, timers, subscriptions, localStorage.
         </p>
         <p>
-          It runs <em>after</em> React commits the render to the screen.
-          The dependency array tells React when to re-run it: whenever any
-          listed value changed since the last render.
+          It runs <em>after</em> React commits the render to the screen. The
+          dependency array tells React when to re-run it: whenever any listed
+          value changed since the last render.
         </p>
         <p>
-          The cleanup function runs <strong>before</strong> the next effect
-          runs and when the component unmounts. It exists so the "outside
-          thing" stays in sync — every subscription gets unsubscribed, every
-          timer gets cleared.
+          The cleanup function runs <strong>before</strong> the next effect runs
+          and when the component unmounts. It exists so the "outside thing"
+          stays in sync — every subscription gets unsubscribed, every timer gets
+          cleared.
         </p>
       </>
     }

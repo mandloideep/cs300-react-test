@@ -16,20 +16,20 @@ const NOTES = (
       <>
         <p>
           A fetch has <strong>four states</strong>: idle, loading, success
-          (data), and error. The UI must know which one it's in so it can
-          show a spinner, the data, or an error message. Track them
-          explicitly — don't try to infer "loading" from "data is falsy".
+          (data), and error. The UI must know which one it's in so it can show a
+          spinner, the data, or an error message. Track them explicitly — don't
+          try to infer "loading" from "data is falsy".
         </p>
         <p>
           Fetches are <strong>side effects</strong>, so they go in{" "}
-          <code>useEffect</code>, never during render. The request starts
-          after the component mounts; the response arrives later and sets
-          state, which re-renders with the data.
+          <code>useEffect</code>, never during render. The request starts after
+          the component mounts; the response arrives later and sets state, which
+          re-renders with the data.
         </p>
         <p>
-          If the component unmounts (or the input changes) while a request
-          is in flight, cancel the old one with <code>AbortController</code>{" "}
-          — otherwise the late response overwrites fresh data.
+          If the component unmounts (or the input changes) while a request is in
+          flight, cancel the old one with <code>AbortController</code> —
+          otherwise the late response overwrites fresh data.
         </p>
       </>
     }

@@ -51,9 +51,7 @@ export default function TabNotes({
 
       {snippet && (
         <section className="notes-block notes-snippet">
-          <h4>
-            Canonical Shape{snippetLabel ? ` — ${snippetLabel}` : ""}
-          </h4>
+          <h4>Canonical Shape{snippetLabel ? ` — ${snippetLabel}` : ""}</h4>
           <CodeViewer code={snippet} />
         </section>
       )}

@@ -22,15 +22,15 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          State is a <strong>snapshot</strong>. Each render captures the
-          values of state at that moment. Calling the setter schedules a{" "}
-          <em>new</em> render with new values — it does not change the
-          variables you already have in scope.
+          State is a <strong>snapshot</strong>. Each render captures the values
+          of state at that moment. Calling the setter schedules a <em>new</em>{" "}
+          render with new values — it does not change the variables you already
+          have in scope.
         </p>
         <p>
-          React decides whether to re-render by comparing new state to old
-          by <strong>reference</strong>. Mutating an object in place keeps
-          the same reference, so nothing re-renders. To update, you replace.
+          React decides whether to re-render by comparing new state to old by{" "}
+          <strong>reference</strong>. Mutating an object in place keeps the same
+          reference, so nothing re-renders. To update, you replace.
         </p>
       </>
     }

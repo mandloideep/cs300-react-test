@@ -23,16 +23,16 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          React components are <strong>LEGO blocks</strong>. Each one does
-          one thing; you snap them together to build complex UIs. You rarely
-          configure a component with a dozen boolean props — instead you
-          pass smaller components into it.
+          React components are <strong>LEGO blocks</strong>. Each one does one
+          thing; you snap them together to build complex UIs. You rarely
+          configure a component with a dozen boolean props — instead you pass
+          smaller components into it.
         </p>
         <p>
           Two lifelines: <code>children</code> lets a parent wrap arbitrary
-          content ("shells" like layouts, cards, modals). "Lifting state up"
-          is how two siblings share data — the common parent owns the
-          state and passes it (plus a setter) down as props.
+          content ("shells" like layouts, cards, modals). "Lifting state up" is
+          how two siblings share data — the common parent owns the state and
+          passes it (plus a setter) down as props.
         </p>
       </>
     }

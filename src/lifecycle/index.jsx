@@ -24,10 +24,9 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          Function components have three phases: <strong>mount</strong>{" "}
-          (first time on screen), <strong>update</strong> (re-render
-          because props or state changed), and <strong>unmount</strong>{" "}
-          (removed from screen).
+          Function components have three phases: <strong>mount</strong> (first
+          time on screen), <strong>update</strong> (re-render because props or
+          state changed), and <strong>unmount</strong> (removed from screen).
         </p>
         <p>
           There are no <code>componentDidMount</code>-style methods.
@@ -36,9 +35,8 @@ const NOTES = (
           runs before the next effect and on unmount.
         </p>
         <p>
-          Order inside one render pass: children render before parents'
-          effects run. Cleanup runs before the next effect in the same
-          component.
+          Order inside one render pass: children render before parents' effects
+          run. Cleanup runs before the next effect in the same component.
         </p>
       </>
     }

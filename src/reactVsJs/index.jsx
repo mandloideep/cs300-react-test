@@ -21,12 +21,12 @@ const NOTES = (
       <>
         <p>
           Vanilla JS is <strong>imperative</strong>: you tell the browser{" "}
-          <em>how</em> to change the DOM step by step (find an element, set
-          its text, add a class).
+          <em>how</em> to change the DOM step by step (find an element, set its
+          text, add a class).
         </p>
         <p>
-          React is <strong>declarative</strong>: you describe <em>what</em>{" "}
-          the UI should look like for the current state. React compares your
+          React is <strong>declarative</strong>: you describe <em>what</em> the
+          UI should look like for the current state. React compares your
           description to the previous one and updates only what changed.
         </p>
         <p>

@@ -21,6 +21,8 @@ import DeployGuide from "./deployGuide";
 import DeployDemo from "./deployDemo";
 import ReactRouterDemo from "./reactRouterDemo";
 import ContextDemo from "./contextDemo";
+import UseMemoDemo from "./useMemoDemo";
+import LibrariesDemo from "./librariesDemo";
 
 // Navigation tabs in teaching order (left to right)
 const TABS = [
@@ -29,6 +31,7 @@ const TABS = [
   { id: "useEffect", label: "useEffect" },
   { id: "useRef", label: "useRef" },
   { id: "useCallback", label: "useCallback" },
+  { id: "useMemo", label: "useMemo" },
   { id: "composition", label: "Composition" },
   { id: "lifecycle", label: "Lifecycle" },
   { id: "window", label: "Window" },
@@ -44,6 +47,7 @@ const TABS = [
   { id: "deployVercel", label: "Deploy Guide (Vercel)" },
   { id: "context", label: "Context API" },
   { id: "reactRouter", label: "React Router" },
+  { id: "libraries", label: "Libraries" },
 ];
 
 function App() {
@@ -99,6 +103,7 @@ function App() {
       {activeDemo === "useEffect" && <UseEffectDemo />}
       {activeDemo === "useRef" && <UseRefDemo />}
       {activeDemo === "useCallback" && <UseCallbackDemo />}
+      {activeDemo === "useMemo" && <UseMemoDemo />}
       {activeDemo === "composition" && <CompositionDemo />}
       {activeDemo === "lifecycle" && <LifecycleDemo />}
       {activeDemo === "window" && <WindowDemo />}
@@ -112,6 +117,7 @@ function App() {
       {activeDemo === "deploy" && <DeployGuide />}
       {activeDemo === "deployVercel" && <DeployDemo />}
       {activeDemo === "reactRouter" && <ReactRouterDemo />}
+      {activeDemo === "libraries" && <LibrariesDemo />}
       {activeDemo === "context" && <ContextDemo />}
       {activeDemo === "home" && (
         <Layout header={<h1>Header</h1>} footer={<h1>Footer</h1>}>

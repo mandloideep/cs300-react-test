@@ -20,18 +20,18 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          Every render, your component function runs again — so every
-          function and object literal inside it is a <strong>new</strong>{" "}
-          value. Children that receive them as props see "different props"
-          and re-render even when the logic hasn't changed.
+          Every render, your component function runs again — so every function
+          and object literal inside it is a <strong>new</strong> value. Children
+          that receive them as props see "different props" and re-render even
+          when the logic hasn't changed.
         </p>
         <p>
-          <code>useCallback</code> freezes a function's identity across
-          renders. <code>useMemo</code> does the same for a computed value.
-          <code>React.memo</code> tells a component to skip re-rendering
-          when its props are equal by reference. The three only help{" "}
-          <strong>together</strong> — memoizing a prop is pointless if the
-          child isn't memoized.
+          <code>useCallback</code> freezes a function's identity across renders.{" "}
+          <code>useMemo</code> does the same for a computed value.
+          <code>React.memo</code> tells a component to skip re-rendering when
+          its props are equal by reference. The three only help{" "}
+          <strong>together</strong> — memoizing a prop is pointless if the child
+          isn't memoized.
         </p>
         <p>
           Treat them as <em>performance</em> tools, not correctness tools.

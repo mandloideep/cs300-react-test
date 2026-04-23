@@ -21,16 +21,17 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          In a controlled form, <strong>React state is the source of
-          truth</strong>. The input's <code>value</code> comes from state,
-          and every keystroke calls <code>onChange</code> to update that
-          state. The DOM input never holds data on its own.
+          In a controlled form,{" "}
+          <strong>React state is the source of truth</strong>. The input's{" "}
+          <code>value</code> comes from state, and every keystroke calls{" "}
+          <code>onChange</code> to update that state. The DOM input never holds
+          data on its own.
         </p>
         <p>
-          Submission is just another event. On <code>onSubmit</code> you
-          call <code>preventDefault()</code> (so the page doesn't reload),
-          read the state, validate, then do whatever comes next (fetch,
-          route change, etc.).
+          Submission is just another event. On <code>onSubmit</code> you call{" "}
+          <code>preventDefault()</code> (so the page doesn't reload), read the
+          state, validate, then do whatever comes next (fetch, route change,
+          etc.).
         </p>
       </>
     }

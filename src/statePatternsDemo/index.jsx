@@ -19,14 +19,14 @@ const NOTES = (
     mentalModel={
       <>
         <p>
-          React compares state by <strong>reference</strong>. Mutating an
-          object or array in place keeps the same reference, so React
-          decides nothing changed and skips the re-render.
+          React compares state by <strong>reference</strong>. Mutating an object
+          or array in place keeps the same reference, so React decides nothing
+          changed and skips the re-render.
         </p>
         <p>
-          The pattern: <strong>build a new copy with the change applied</strong>, then
-          pass it to the setter. Spread, map, filter — never push, splice,
-          or direct assignment.
+          The pattern: <strong>build a new copy with the change applied</strong>
+          , then pass it to the setter. Spread, map, filter — never push,
+          splice, or direct assignment.
         </p>
       </>
     }
